@@ -18,7 +18,6 @@ class CreateAccountComment extends Migration
             $table->integer('idAccount');
             $table->integer('idComment');
             $table->smallInteger('Type');
-
         });
     }
 

@@ -19,6 +19,9 @@ class CreateCommentsTable extends Migration
             $table->binary('File');
             $table->smallInteger('Type');
             $table->smallInteger('Popularity');
+            $table->integer('idAccount');
+            $table->integer('idPost');
+
             $table->timestamps();
         });
     }

@@ -20,6 +20,9 @@ class CreateNotificationsTable extends Migration
             $table->date('notificationDate');
             $table->boolean('Seen');
             $table->timestamps();
+            $table->integer('idAccount');
+            $table->integer('idPost');
+
         });
     }
 

@@ -18,6 +18,8 @@ class CreatePollsTable extends Migration
             $table->string('Content');
             $table->smallInteger('Vote');
             $table->timestamps();
+            $table->integer('idPost');
+
         });
     }
 

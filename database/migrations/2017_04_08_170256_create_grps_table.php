@@ -18,6 +18,7 @@ class CreateGrpsTable extends Migration
             $table->string('Name');
             $table->date('creationDate');
             $table->text('About');
+            $table->integer('idAccount');
             $table->timestamps();
         });
     }

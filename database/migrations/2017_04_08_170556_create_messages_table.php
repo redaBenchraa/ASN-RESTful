@@ -17,6 +17,10 @@ class CreateMessagesTable extends Migration
             $table->increments('idMessage');
             $table->text('Content');
             $table->timestamps();
+            $table->integer('idAccount');
+            $table->integer('idConversation');
+
+
         });
     }
 
