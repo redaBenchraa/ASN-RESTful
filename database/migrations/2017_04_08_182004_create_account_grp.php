@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateConversationsTable extends Migration
+class CreateAccountGrp extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateConversationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('conversations', function (Blueprint $table) {
-            $table->increments('idConversation');
-            $table->timestamps();
+        Schema::create('account_grp', function (Blueprint $table) {
+            $table->increments('idAccountGrp');
+            $table->integer('idAccount');
+            $table->integer('idGrp');
         });
     }
 
@@ -26,6 +27,7 @@ class CreateConversationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('conversations');
+        Schema::dropIfExists('account_grp');
+
     }
 }
