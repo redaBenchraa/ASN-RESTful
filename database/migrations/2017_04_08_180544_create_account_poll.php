@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePollsTable extends Migration
+class CreateAccountPoll extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreatePollsTable extends Migration
      */
     public function up()
     {
-        Schema::create('polls', function (Blueprint $table) {
-            $table->increments('idPoll');
-            $table->string('Content');
-            $table->smallInteger('Vote');
-            $table->timestamps();
+        Schema::create('account_poll', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('idAccount');
+            $table->integer('idPoll');
         });
     }
 
@@ -28,6 +27,6 @@ class CreatePollsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('polls');
+        Schema::dropIfExists('account_poll');
     }
 }
