@@ -16,7 +16,7 @@ class CreateMessageNotificationsTable extends Migration
         Schema::create('message_notifications', function (Blueprint $table) {
             $table->increments('idMessageNotification');
             $table->text('Content');
-            $table->bosolean('Seen');
+            $table->boolean('Seen');
             $table->timestamps();
         });
     }
