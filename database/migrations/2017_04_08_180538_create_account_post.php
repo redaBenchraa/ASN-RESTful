@@ -15,8 +15,8 @@ class CreateAccountPost extends Migration
     {
         Schema::create('account_post', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idAccount');
-            $table->integer('idPost');
+            $table->integer('Account_id');
+            $table->integer('Post_id');
             $table->smallInteger('Type');
 
         });

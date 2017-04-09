@@ -14,10 +14,14 @@ class CreateMessageNotificationsTable extends Migration
     public function up()
     {
         Schema::create('message_notifications', function (Blueprint $table) {
-            $table->increments('idMessageNotification');
+            $table->increments('id');
             $table->text('Content');
             $table->boolean('Seen');
             $table->timestamps();
+            $table->integer('Account_id');
+            $table->integer('Message_id');
+
+
         });
     }
 

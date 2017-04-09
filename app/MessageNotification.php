@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class MessageNotification extends Model
 {
     public function relatesToMessage(){
-        return $this->belongsTo('App\Message','idMessage');
+        return $this->belongsTo('App\Message');
     }
 
     public function sentTo(){
-        return $this->belongsTo('App\Account','idAccount');
+        return $this->belongsTo('App\Account');
     }
 }

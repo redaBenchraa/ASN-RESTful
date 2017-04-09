@@ -14,9 +14,9 @@ class CreateGrpAccount extends Migration
     public function up()
     {
         Schema::create('grp_account', function (Blueprint $table) {
-            $table->increments('idGrpAccount');
-            $table->integer('idAccount');
-            $table->integer('idGrp');
+            $table->increments('id');
+            $table->integer('Account_id');
+            $table->integer('Grp_id');
         });
     }
 

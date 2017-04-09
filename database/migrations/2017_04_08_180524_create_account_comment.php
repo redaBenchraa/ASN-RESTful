@@ -15,10 +15,9 @@ class CreateAccountComment extends Migration
     {
         Schema::create('account_comment', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idAccount');
-            $table->integer('idComment');
+            $table->integer('Account_id');
+            $table->integer('Comment_id');
             $table->smallInteger('Type');
-
         });
     }
 

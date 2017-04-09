@@ -15,8 +15,8 @@ class CreateAccountPoll extends Migration
     {
         Schema::create('account_poll', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idAccount');
-            $table->integer('idPoll');
+            $table->integer('Account_id');
+            $table->integer('Poll_id');
         });
     }
 

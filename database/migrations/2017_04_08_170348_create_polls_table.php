@@ -14,10 +14,12 @@ class CreatePollsTable extends Migration
     public function up()
     {
         Schema::create('polls', function (Blueprint $table) {
-            $table->increments('idPoll');
+            $table->increments('id');
             $table->string('Content');
             $table->smallInteger('Vote');
+            $table->integer('Post_id');
             $table->timestamps();
+
         });
     }
 

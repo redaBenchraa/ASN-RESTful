@@ -7,54 +7,50 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
     public function receiveNotification(){
-        return $this->hasMany('App\Notification','idNotification');
+        return $this->hasMany('App\Notification');
     }
 
     public function receiveMessageNotification(){
-        return $this->hasMany('App\Notification','idNotification');
+        return $this->hasMany('App\Notification');
     }
 
     public function sendMessage(){
-        return $this->hasMany('App\Message','idMessage');
-    }
-
-    public function participateInConversation(){
-        return $this->belongsToMany('App\Conversation','account_conversation');
-    }
-
-    public function voteInPoll(){
-        return $this->belongsToMany('App\Poll','account_poll');
-    }
-
-    public function reactInComment(){
-        return $this->belongsToMany('App\Comment','account_comment');
+        return $this->hasMany('App\Message');
     }
 
     public function Comment(){
-        return $this->hasMany('App\Comment','idComment');
-    }
-
-    public function reactsInPost(){
-        return $this->belongsToMany('App\Post','account_post');
+        return $this->hasMany('App\Comment');
     }
 
     public function Post(){
-        return $this->hasMany('App\Post','idPost');
+        return $this->hasMany('App\Post');
     }
 
     public function createGroup(){
-        return $this->hasMany('App\Grp','idGroup');
+        return $this->hasMany('App\Grp','Account_id');
+    }
+
+    public function participateInConversation(){
+        return $this->belongsToMany('App\Conversation','account_conversation','Account_id','Conversation_id');
+    }
+
+    public function voteInPoll(){
+        return $this->belongsToMany('App\Poll','account_poll','Account_id','Poll_id');
+    }
+
+    public function reactInComment(){
+        return $this->belongsToMany('App\Comment','account_comment','Account_id','Comment_id');
+    }
+
+    public function reactsInPost(){
+        return $this->belongsToMany('App\Post','account_post','Account_id','Post_id');
     }
 
     public function administrate(){
-        return $this->belongsToMany('App\Grp','account_grp');
+        return $this->belongsToMany('App\Grp','account_grp','Grp_id','Account_id');
     }
 
     public function belongsToGroup(){
-        return $this->belongsToMany('App\Grp','grp_account');
+        return $this->belongsToMany('App\Grp','grp_account','Grp_id','Account_id');
     }
-
-
-
-
 }

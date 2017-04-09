@@ -14,10 +14,12 @@ class CreateGrpsTable extends Migration
     public function up()
     {
         Schema::create('grps', function (Blueprint $table) {
-            $table->increments('idGroup');
+            $table->increments('id');
             $table->string('Name');
             $table->date('creationDate');
+            $table->binary('Image')->nullable();
             $table->text('About');
+            $table->integer('Account_id');
             $table->timestamps();
         });
     }

@@ -3,4 +3,6 @@
 .env.php
 .env
 /vendor
+/vendor/Composer
+/vendor/*
 \.idea/

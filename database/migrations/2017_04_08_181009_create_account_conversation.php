@@ -14,9 +14,9 @@ class CreateAccountConversation extends Migration
     public function up()
     {
         Schema::create('account_conversation', function (Blueprint $table) {
-            $table->increments('idAccountConversation');
-            $table->integer('idAccount');
-            $table->integer('idConversation');
+            $table->increments('id');
+            $table->integer('Account_id');
+            $table->integer('Conversation_id');
         });
     }
 
