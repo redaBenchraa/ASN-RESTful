@@ -20,6 +20,7 @@ class CreateGrpsTable extends Migration
             $table->binary('Image')->nullable();
             $table->text('About');
             $table->integer('Account_id');
+            $table->integer('Grp_id');
             $table->timestamps();
         });
     }

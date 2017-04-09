@@ -21,9 +21,9 @@ class CreatePostsTable extends Migration
             $table->smallInteger('Type');
             $table->dateTime('postingDate');
             $table->smallInteger('popularity');
-            $table->timestamps();
             $table->integer('Account_id');
             $table->integer('Group_id');
+            $table->timestamps();
 
         });
     }
