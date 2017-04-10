@@ -57,7 +57,9 @@ class AccountController extends Controller
      */
     public function show($id)
     {
-        $data = $this->Accounts->getAccount($id);
+        $params = request()->input();
+        $params['id'] = $id;
+        $data = $this->Accounts->getAccounts($params);
         return response()->json($data);
     }
 

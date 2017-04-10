@@ -7,23 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
     public function receiveNotification(){
-        return $this->hasMany('App\Notification');
+        return $this->hasMany('App\Notification','Account_id');
     }
 
     public function receiveMessageNotification(){
-        return $this->hasMany('App\Notification');
+        return $this->hasMany('App\Notification','Account_id');
     }
 
     public function sendMessage(){
-        return $this->hasMany('App\Message');
+        return $this->hasMany('App\Message','Account_id');
     }
 
     public function Comment(){
-        return $this->hasMany('App\Comment');
+        return $this->hasMany('App\Comment','Account_id');
     }
 
     public function Post(){
-        return $this->hasMany('App\Post');
+        return $this->hasMany('App\Post','Account_id');
     }
 
     public function createGroup(){

@@ -7,23 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     public function containedComments(){
-        return $this->hasMany('App\Comment');
+        return $this->hasMany('App\Comment','Comment_id');
     }
 
     public function postedBy(){
-        return $this->belongsTo('App\account');
+        return $this->belongsTo('App\account','Account_id');
     }
 
     public function containingGrp(){
-        return $this->belongsTo('App\Grp');
+        return $this->belongsTo('App\Grp','Grp_id');
     }
 
     public function relatedNotification(){
-        return $this->hasMany('App\Notification');
+        return $this->hasMany('App\Notification','Notification_id');
     }
 
     public function containedPolls(){
-        return $this->hasMany('App\Poll');
+        return $this->hasMany('App\Poll','Poll_id');
     }
 
     public function reactingAccounts(){

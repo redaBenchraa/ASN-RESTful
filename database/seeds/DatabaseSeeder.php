@@ -11,8 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        /*// $this->call(UsersTableSeeder::class);
-        factory(\App\Account::class, 100)->create();
+        // $this->call(UsersTableSeeder::class);
+        /*factory(\App\Account::class, 100)->create();
         factory(\App\Grp::class, 20)->create();
         factory(\App\Post::class, 10)->create();
         factory(\App\Comment::class, 30)->create();
@@ -38,6 +38,39 @@ class DatabaseSeeder extends Seeder
             }
         }
         DB::table('account_conversation')->insert($pivots);*/
+
+        /*$groupIds= DB::table('grps')->pluck('id');
+        $accountIds= DB::table('accounts')->pluck('id');
+        $pivots = [];
+        foreach($groupIds as $groupId)
+        {
+            $randomizedCarIds = $accountIds;
+            $array = iterator_to_array($randomizedCarIds);
+            shuffle($array);
+            for($index = 0; $index < 3; $index++) {
+                   $pivots[] = [
+                        'Grp_id' => $groupId,
+                        'Account_id' => array_shift($array)
+                   ];
+            }
+        }
+        DB::table('grp_account')->insert($pivots);*/
+        /*$groupIds= DB::table('grps')->pluck('id');
+        $accountIds= DB::table('accounts')->pluck('id');
+        $pivots = [];
+        foreach($groupIds as $groupId)
+        {
+            $randomizedCarIds = $accountIds;
+            $array = iterator_to_array($randomizedCarIds);
+            shuffle($array);
+            for($index = 0; $index < 3; $index++) {
+                $pivots[] = [
+                    'Grp_id' => $groupId,
+                    'Account_id' => array_shift($array)
+                ];
+            }
+        }
+        DB::table('account_grp')->insert($pivots);*/
 
 
     }
