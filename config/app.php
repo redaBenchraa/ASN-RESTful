@@ -181,6 +181,7 @@ return [
         App\Providers\v1\CommentServiceProvider::class,
         App\Providers\v1\ConversationServiceProvider::class,
         App\Providers\v1\MessageServiceProvider::class,
+        App\Providers\v1\PollServiceProvider::class,
 
     ],
 

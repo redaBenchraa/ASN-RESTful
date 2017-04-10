@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $faker  = \Faker\Factory::create() ;
 
         // $this->call(UsersTableSeeder::class);
         /*factory(\App\Account::class, 100)->create();
@@ -73,6 +74,60 @@ class DatabaseSeeder extends Seeder
         }
         DB::table('account_grp')->insert($pivots);*/
 
+        /*$pollIds= DB::table('polls')->pluck('id');
+        $accountIds= DB::table('accounts')->pluck('id');
+        $pivots = [];
+        foreach($pollIds as $pollId)
+        {
+            $randomizedCarIds = $accountIds;
+            $array = iterator_to_array($randomizedCarIds);
+            shuffle($array);
+            for($index = 0; $index < 5; $index++) {
+                $pivots[] = [
+                    'Poll_id' => $pollId,
+                    'Account_id' => array_shift($array)
+                ];
+            }
+        }
+        DB::table('account_poll')->insert($pivots);*/
+
+
+        $commentIds= DB::table('comments')->pluck('id');
+        $accountIds= DB::table('accounts')->pluck('id');
+        $pivots = [];
+        foreach($commentIds as $commentId)
+        {
+            $randomizedCarIds = $accountIds;
+            $array = iterator_to_array($randomizedCarIds);
+            shuffle($array);
+            for($index = 0; $index < 10; $index++) {
+                $pivots[] = [
+                    'Comment_id' => $commentId,
+                    'Account_id' => array_shift($array),
+                    'Type' => $faker->boolean
+                ];
+            }
+        }
+        DB::table('account_comment')->insert($pivots);
+
+        $postIds= DB::table('posts')->pluck('id');
+        $accountIds= DB::table('accounts')->pluck('id');
+        $pivots = [];
+        foreach($postIds as $postId)
+        {
+            $randomizedCarIds = $accountIds;
+            $array = iterator_to_array($randomizedCarIds);
+            shuffle($array);
+            for($index = 0; $index < 100; $index++) {
+                $pivots[] = [
+                    'Post_id' => $postId,
+                    'Account_id' => array_shift($array),
+                    'Type' => $faker->boolean
+
+                ];
+            }
+        }
+        DB::table('account_post')->insert($pivots);
 
     }
 }
