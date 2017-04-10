@@ -47,10 +47,10 @@ class Account extends Model
     }
 
     public function administrate(){
-        return $this->belongsToMany('App\Grp','account_grp','Grp_id','Account_id');
+        return $this->belongsToMany('App\Grp','account_grp','Account_id','Grp_id');
     }
 
     public function belongsToGroup(){
-        return $this->belongsToMany('App\Grp','grp_account','Grp_id','Account_id');
+        return $this->belongsToMany('App\Grp','grp_account','Account_id','Grp_id');
     }
 }

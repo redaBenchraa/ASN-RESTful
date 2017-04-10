@@ -1,6 +1,7 @@
 <?php
 
 use v1\AccountController;
+use v1\GrpController;
 use Illuminate\Http\Request;
 
 /*
@@ -19,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('/v1/Accounts', AccountController::class);
+Route::resource('/v1/Groups', GrpController::class);

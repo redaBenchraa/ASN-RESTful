@@ -2,7 +2,7 @@
 
 namespace App\Providers\v1;
 
-use App\Services\v1\GrpsService;
+use App\Services\v1\Groupervices;
 use Illuminate\Support\ServiceProvider;
 class GrpServiceProvider extends ServiceProvider
 {
@@ -23,8 +23,8 @@ class GrpServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(GrpsService::class,function($app){
-            return new GrpsService();
+        $this->app->bind(GrpsServices::class,function($app){
+            return new GroupsService();
         });
     }
 }

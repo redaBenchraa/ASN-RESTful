@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\v1;
 
+use App\Services\v1\GrpsServices;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Services\v1\GrpsService;
 
 class GrpController extends Controller
 {
@@ -14,7 +14,7 @@ class GrpController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected  $Grp;
-    public function  __construct(GrpsService $service)
+    public function  __construct(GrpsServices $service)
     {
         $this->Grp = $service;
     }
