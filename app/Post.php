@@ -11,7 +11,7 @@ class Post extends Model
     }
 
     public function postedBy(){
-        return $this->belongsTo('App\account','Account_id');
+        return $this->belongsTo('App\Account','Account_id');
     }
 
     public function containingGrp(){

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Conversation extends Model
 {
     public function containMessage(){
-        return $this->hasMany('App\Message');
+        return $this->hasMany('App\Message','Conversation_id');
     }
 
     public function containAccount(){

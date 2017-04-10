@@ -1,27 +1,26 @@
 <?php
 
 namespace App\Http\Controllers\v1;
-use App\Services\v1\AccountsService;
+use App\Services\v1\PostService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AccountController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    protected  $Accounts;
-    public function  __construct(AccountsService $service)
+    protected  $Posts;
+    public function  __construct(Postservice $service)
     {
-        $this->Accounts = $service;
+        $this->Posts = $service;
     }
-
     public function index()
     {
         $params = request()->input();
-        $data = $this->Accounts->getAccounts($params);
+        $data = $this->Posts->getPosts($params);
         return response()->json($data);
     }
 
@@ -56,7 +55,7 @@ class AccountController extends Controller
     {
         $params = request()->input();
         $params['id'] = $id;
-        $data = $this->Accounts->getAccounts($params);
+        $data = $this->Posts->getPosts($params);
         return response()->json($data);
     }
 

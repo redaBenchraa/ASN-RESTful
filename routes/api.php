@@ -2,6 +2,10 @@
 
 use v1\AccountController;
 use v1\GrpController;
+use v1\PostController;
+use v1\ComentController;
+use v1\ConversationController;
+use v1\MessageController;
 use Illuminate\Http\Request;
 
 /*
@@ -21,3 +25,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('/v1/Accounts', AccountController::class);
 Route::resource('/v1/Groups', GrpController::class);
+Route::resource('/v1/Messages', MessageController::class);
+Route::resource('/v1/Accounts', AccountController::class);
+Route::resource('/v1/Posts', PostController::class);
+Route::resource('/v1/Comments', ComentController::class);
+Route::resource('/v1/Conversations', ConversationController::class);
