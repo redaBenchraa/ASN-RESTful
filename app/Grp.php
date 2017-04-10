@@ -19,7 +19,7 @@ class Grp extends Model
     }
 
     public function contain(){
-        return $this->hasMany('App\Post','Post_id');
+        return $this->hasMany('App\Post','Grp_id');
     }
 
     public function administratedBy(){

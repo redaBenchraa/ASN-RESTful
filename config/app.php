@@ -177,6 +177,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\v1\AccountServiceProvider::class,
+        App\Providers\v1\PostServiceProvider::class,
+        App\Providers\v1\CommentServiceProvider::class,
+        App\Providers\v1\ConversationServiceProvider::class,
+        App\Providers\v1\MessageServiceProvider::class,
 
     ],
 

@@ -1,27 +1,28 @@
 <?php
 
 namespace App\Http\Controllers\v1;
-use App\Services\v1\AccountsService;
+
+use App\Services\v1\MessageService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AccountController extends Controller
+class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    protected  $Accounts;
-    public function  __construct(AccountsService $service)
+    protected  $Messages;
+    public function  __construct(MessageService $service)
     {
-        $this->Accounts = $service;
+        $this->Messages = $service;
     }
 
     public function index()
     {
         $params = request()->input();
-        $data = $this->Accounts->getAccounts($params);
+        $data = $this->Messages->getMessages($params);
         return response()->json($data);
     }
 
@@ -56,7 +57,7 @@ class AccountController extends Controller
     {
         $params = request()->input();
         $params['id'] = $id;
-        $data = $this->Accounts->getAccounts($params);
+        $data = $this->Messages->getMessages($params);
         return response()->json($data);
     }
 

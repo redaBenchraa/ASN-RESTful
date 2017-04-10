@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     public function containedComments(){
-        return $this->hasMany('App\Comment','Comment_id');
+        return $this->hasMany('App\Comment','Post_id');
     }
 
     public function postedBy(){
-        return $this->belongsTo('App\account','Account_id');
+        return $this->belongsTo('App\Account','Account_id');
     }
 
     public function containingGrp(){
@@ -23,7 +23,7 @@ class Post extends Model
     }
 
     public function containedPolls(){
-        return $this->hasMany('App\Poll','Poll_id');
+        return $this->hasMany('App\Poll','Post_id');
     }
 
     public function reactingAccounts(){
