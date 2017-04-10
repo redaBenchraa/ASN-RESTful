@@ -79,7 +79,7 @@ $factory->define(\App\Poll::class, function (Faker\Generator $faker) {
     return [
         'Content' => $faker->word(100),
         'Vote' => $faker->numberBetween(1,70),
-        'Post_id' => $faker->numberBetween(1,10)
+        'Post_id' => $faker->numberBetween(1,110)
     ];
 });
 $factory->define(\App\Conversation::class, function (Faker\Generator $faker) {

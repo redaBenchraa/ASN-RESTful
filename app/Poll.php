@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Poll extends Model
 {
     public function containingPost(){
-        return $this->belongsTo('App\Post','Post_id');
+        return $this->belongsTo('App\Post');
     }
 
     public function voters(){

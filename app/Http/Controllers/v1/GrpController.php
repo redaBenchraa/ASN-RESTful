@@ -13,14 +13,16 @@ class GrpController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    protected  $Grp;
+    protected  $Grps;
     public function  __construct(GrpsServices $service)
     {
-        $this->Grp = $service;
+        $this->Grps = $service;
     }
     public function index()
     {
-        echo 'I am here';
+        $params = request()->input();
+        $data = $this->Grps->getGrps($params);
+        return response()->json($data);
     }
 
     /**
@@ -52,7 +54,11 @@ class GrpController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $params = request()->input();
+        $params['id'] = $id;
+        $data = $this->Grps->getGrps($params);
+        return response()->json($data);
     }
 
     /**
