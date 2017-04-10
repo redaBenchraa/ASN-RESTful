@@ -11,7 +11,7 @@ class Account extends Model
     }
 
     public function receiveMessageNotification(){
-        return $this->hasMany('App\Notification','Account_id');
+        return $this->hasMany('App\MessageNotification','Account_id');
     }
 
     public function sendMessage(){

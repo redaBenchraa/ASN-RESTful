@@ -7,6 +7,7 @@ use v1\ComentController;
 use v1\ConversationController;
 use v1\MessageController;
 use v1\PollController;
+use v1\MessageNotificationController;
 use Illuminate\Http\Request;
 
 /*
@@ -33,3 +34,4 @@ Route::resource('/v1/Comments', ComentController::class);
 Route::resource('/v1/Conversations', ConversationController::class);
 Route::resource('/v1/Messages', MessageController::class);
 Route::resource('/v1/Polls', PollController::class);
+Route::resource('/v1/MessageNotifications', MessageNotificationController::class);

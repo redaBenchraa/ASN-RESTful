@@ -183,6 +183,7 @@ return [
         App\Providers\v1\ConversationServiceProvider::class,
         App\Providers\v1\MessageServiceProvider::class,
         App\Providers\v1\PollServiceProvider::class,
+        App\Providers\v1\MessageNotificationServiceProvider::class,
     ],
 
     /*

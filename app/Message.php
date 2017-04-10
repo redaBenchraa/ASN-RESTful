@@ -15,7 +15,7 @@ class Message extends Model
     }
 
     public function relatedToNotification(){
-        return $this->hasMany('App\MessageNotification','MessageNotification_id');
+        return $this->hasMany('App\MessageNotification','Message_id');
     }
 
 }
