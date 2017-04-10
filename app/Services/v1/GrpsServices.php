@@ -13,8 +13,7 @@ use App\Account;
 use App\Http\Controllers\v1\AccountController;
 
 
-class GrpsServices
-{
+class GrpsServices extends serviceBP {
     protected $supportedFields = [
         'createdBy' => 'owner',
         'administratedBy' => 'admins',
@@ -24,11 +23,11 @@ class GrpsServices
 
     protected $clauseProprieties = [
         'id' => 'id',
+        'Account_id' => 'owned'
+        //super group
     ];
+
     public function getGrps($params){
-
-
-
             $withKeys = [];
             if(empty($params)){
                 return $this->filterGrps(Grp::all(),$withKeys);
@@ -37,8 +36,6 @@ class GrpsServices
             $whereClauses = $this->getWhereClauses($params);
             $Grps = Grp::with($withKeys)->where($whereClauses)->get();
             return $this->filterGrps($Grps,$withKeys);
-
-
     }
 
     protected function filterGrps($Grps,$withKeys){
@@ -130,25 +127,4 @@ class GrpsServices
         }
         return $data;
     }
-    protected function getWithKeys($params){
-        $withKeys = [];
-        if(isset($params['include'])){
-            $includes = [];
-            $includeParams = explode(',',$params['include']);
-            $includes = array_intersect($this->supportedFields,$includeParams);
-            $withKeys = array_keys($includes);
-        }
-        return  $withKeys;
-    }
-
-    protected function getWhereClauses($params){
-        $clause = [];
-        foreach ($this->clauseProprieties as $propriety){
-            if(in_array($propriety,array_keys($params))){
-                $clause[$propriety] = $params[$propriety];
-            }
-        }
-        return  $clause;
-    }
-
 }

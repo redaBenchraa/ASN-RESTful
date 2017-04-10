@@ -11,7 +11,7 @@ class Grp extends Model
     }
 
     public function haveSuperGroup(){
-        return $this->belongsTo('App\Grp','Grp_id');
+        return $this->belongsTo('App\Grp');
     }
 
     public function haveSubGroup(){
