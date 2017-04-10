@@ -15,6 +15,7 @@ class CommentService extends serviceBP {
     protected $supportedFields = [
         'containingPost' => 'post',
         'commentedBy' => 'account',
+        'reactingAccounts' => 'reactions'
     ];
 
     protected $clauseProprieties = [
@@ -73,6 +74,18 @@ class CommentService extends serviceBP {
                     'File' => $Post->File,
                     'Image' => $Post->Image,
                 ];
+            }
+            if(in_array('reactingAccounts',$withKeys)){
+                $reactedAccounts = $Comment->reactingAccounts;
+                $reactedAccountList =[];
+                foreach ($reactedAccounts as $reactedAccount) {
+                    $reactedAccountItem = [
+                        'Account_id' => $reactedAccount->id,
+                        'type' => $reactedAccount->pivot->type,
+                    ];
+                    $reactedAccountList[] = $reactedAccountItem;
+                }
+                $entry['reactions'] = $reactedAccountList;
             }
             $data[] = $entry;
         }

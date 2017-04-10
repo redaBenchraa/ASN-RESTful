@@ -39,11 +39,11 @@ class Account extends Model
     }
 
     public function reactInComment(){
-        return $this->belongsToMany('App\Comment','account_comment','Account_id','Comment_id');
+        return $this->belongsToMany('App\Comment','account_comment','Account_id','Comment_id')->withPivot('type');
     }
 
     public function reactsInPost(){
-        return $this->belongsToMany('App\Post','account_post','Account_id','Post_id');
+        return $this->belongsToMany('App\Post','account_post','Account_id','Post_id')->withPivot('type');
     }
 
     public function administrate(){

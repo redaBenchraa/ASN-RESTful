@@ -14,7 +14,10 @@ class AccountsService extends serviceBP {
         'Post' => 'posts',
         'sendMessage' => 'sentMessages',
         'receiveMessageNotification' => 'messageNotifications',
-        'receiveNotification' => 'notifications'
+        'receiveNotification' => 'notifications',
+        'reactsInPost' => 'reactInPost',
+        'reactInComment' => 'reactInComment',
+        'voteInPoll' => 'voteInPoll',
     ];
     protected $clauseProprieties = [
         'id' => 'id',
@@ -172,6 +175,40 @@ class AccountsService extends serviceBP {
                 }
                 $entry['conversations'] = $conversationList;
             }
+            if(in_array('reactsInPost',$withKeys)){
+                $postReacts = $Account->reactsInPost;
+                $postReactList =[];
+                foreach ($postReacts as $postReact) {
+                    $reactPostItem = [
+                        'id' => $postReact->id,
+                        'Post_type' => $postReact->pivot->type,
+                    ];
+                    $postReactList[] = $reactPostItem;
+                }
+                $entry['reactInPost'] = $postReactList;
+            }
+            if(in_array('reactInComment',$withKeys)){
+                $postReacts = $Account->reactInComment;
+                $postReactList =[];
+                foreach ($postReacts as $postReact) {
+                    $reactPostItem = [
+                        'Comment_id' => $postReact->id,
+                        'type' => $postReact->pivot->type,
+                    ];
+                    $postReactList[] = $reactPostItem;
+                }
+                $entry['reactInComment'] = $postReactList;
+            }
+            if(in_array('voteInPoll',$withKeys)){
+                $postReacts = $Account->voteInPoll;
+                $postReactList =[];
+                foreach ($postReacts as $postReact) {
+                    $reactPostItem =$postReact->id;
+                    $postReactList[] = $reactPostItem;
+                }
+                $entry['voteInPoll'] = $postReactList;
+            }
+
             $data[] = $entry;
         }
         return $data;

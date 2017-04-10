@@ -17,6 +17,7 @@ class PostService  extends serviceBP {
         'containedPolls' => 'polls',
         'containingGrp' => 'group',
         'postedBy' => 'account',
+        'reactingAccounts' => 'reactions'
 
     ];
     protected $clauseProprieties = [
@@ -30,7 +31,6 @@ class PostService  extends serviceBP {
 
     public function getPosts($params){
         $withKeys = [];
-        $whereClauses = [];
         if(empty($params)){
             return $this->filterPosts(Post::all(),$withKeys);
         }
@@ -107,6 +107,18 @@ class PostService  extends serviceBP {
                         $pollList[] = $pollItem;
                 }
                 $entry['polls'] = $pollList;
+            }
+            if(in_array('reactingAccounts',$withKeys)){
+                $reactedAccounts = $Post->reactingAccounts;
+                $reactedAccountList =[];
+                foreach ($reactedAccounts as $reactedAccount) {
+                    $reactedAccountItem = [
+                        'Account_id' => $reactedAccount->id,
+                        'type' => $reactedAccount->pivot->type,
+                    ];
+                    $reactedAccountList[] = $reactedAccountItem;
+                }
+                $entry['reactions'] = $reactedAccountList;
             }
             $data[] = $entry;
         }

@@ -27,6 +27,6 @@ class Post extends Model
     }
 
     public function reactingAccounts(){
-        return $this->belongsToMany('App\Account','account_post','Post_id','Account_id');
+        return $this->belongsToMany('App\Account','account_post','Post_id','Account_id')->withPivot('type');
     }
 }

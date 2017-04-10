@@ -32,9 +32,9 @@ class serviceBP
     ];
     protected function getWhereClauses($params){
         $clause = [];
-        foreach ($this->clauseProprieties as $propriety){
+        foreach ($this->clauseProprieties as $keys =>$propriety){
             if(in_array($propriety,array_keys($params))){
-                $clause[$propriety] = $params[$propriety];
+                $clause[$keys] = $params[$propriety];
             }
         }
         return  $clause;
