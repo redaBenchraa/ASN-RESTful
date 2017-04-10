@@ -6,6 +6,25 @@ use App\Account;
 
 class AccountsService extends serviceBP {
 
+    protected $supportedFields = [
+        'createGroup' => 'myGroups',
+        'participateInConversation' => 'conversations',
+        'administrate' => 'administratedGroups',
+        'belongsToGroup' => 'groups',
+        'Post' => 'posts',
+        'sendMessage' => 'sentMessages',
+        'receiveMessageNotification' => 'messageNotifications',
+        'receiveNotification' => 'notifications'
+    ];
+    protected $clauseProprieties = [
+        'id' => 'id',
+        'firstName' => 'firstName',
+        'lastName' => 'lastName',
+        'Email' => 'Email',
+        'showEmail' => 'showEmail',
+        'xCoordinate' => 'xCoordinate',
+        'yCoordinate' => 'yCoordinate',
+    ];
     public function getAccounts($params){
         $withKeys = [];
         if(empty($params)){
