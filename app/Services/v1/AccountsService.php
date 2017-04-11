@@ -7,10 +7,10 @@ use App\Account;
 class AccountsService extends serviceBP {
 
     protected $supportedFields = [
+        'belongsToGroup' => 'groups',
+        'administrate' => 'administratedGroups',
         'createGroup' => 'myGroups',
         'participateInConversation' => 'conversations',
-        'administrate' => 'administratedGroups',
-        'belongsToGroup' => 'groups',
         'Post' => 'posts',
         'sendMessage' => 'sentMessages',
         'receiveMessageNotification' => 'messageNotifications',
@@ -49,6 +49,8 @@ class AccountsService extends serviceBP {
                 'About' => $Account->About,
                 'showEmail' => $Account->showEmail,
                 'Image' => $Account->Image,
+                'xCoordinate' => $Account->xCoordinate,
+                'yCoordinate' => $Account->yCoordinate,
                 'href' => route('Accounts.show',['id'=>$Account->id]),
             ];
             if(in_array('receiveNotification',$withKeys)){
