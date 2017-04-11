@@ -17,7 +17,9 @@ class NotificationService extends serviceBP{
     ];
     protected $clauseProprieties = [
         'id' => 'id',
-        'seen' => 'seen'
+        'seen' => 'seen',
+        'Post_id' => 'post',
+        'account_id' => 'account'
     ];
 
     public function getNotifications($params){

@@ -19,7 +19,9 @@ class MessageNotificationService extends serviceBP
 
     protected $clauseProprieties = [
         'id' => 'id',
-        'seen' => 'seen'
+        'seen' => 'seen',
+        'Message_Id' => 'message',
+        'Account_id' => 'account',
     ];
 
     public function getMessageNotifications($params)
