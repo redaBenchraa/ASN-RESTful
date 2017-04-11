@@ -1,0 +1,149 @@
+{
+	"variables": [],
+	"info": {
+		"name": "ASN-RESTful",
+		"_postman_id": "2363de84-6dae-8d6a-0070-ef45693706d5",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"description": "",
+			"item": [
+				{
+					"name": "http://127.0.0.1:8000/api/v1/Accounts",
+					"request": {
+						"url": "http://127.0.0.1:8000/api/v1/Accounts/1",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Get all accounts"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:8000/api/v1/Accounts/1",
+					"request": {
+						"url": "http://127.0.0.1:8000/api/v1/Accounts/1",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Get one account using the id "
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:8000/api/v1/Accounts/10?include=groups",
+					"request": {
+						"url": "http://127.0.0.1:8000/api/v1/Accounts/10?include=groups",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Get account with groups it belongs to"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:8000/api/v1/Accounts/1?include=myGroups",
+					"request": {
+						"url": "http://127.0.0.1:8000/api/v1/Accounts/1?include=myGroups",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Account with groups it created"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:8000/api/v1/Accounts/1?include=administratedGroups",
+					"request": {
+						"url": "http://127.0.0.1:8000/api/v1/Accounts/1?include=administratedGroups",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Account with groups it  administrate"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:8000/api/v1/Accounts/1?include=conversations",
+					"request": {
+						"url": "http://127.0.0.1:8000/api/v1/Accounts/1?include=conversations",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Account with its conversations\n"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:8000/api/v1/Accounts/1?include=sentMessages",
+					"request": {
+						"url": "http://127.0.0.1:8000/api/v1/Accounts/1?include=sentMessages",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Account with its sent messages\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:8000/api/v1/Accounts/1?include=Notifications",
+					"request": {
+						"url": "http://127.0.0.1:8000/api/v1/Accounts/1?include=notifications",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Account with its notifications"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:8000/api/v1/Accounts/1?include=reactInPost",
+					"request": {
+						"url": "http://127.0.0.1:8000/api/v1/Accounts/1?include=reactInPost",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:8000/api/v1/Accounts/1?include=reactInComment",
+					"request": {
+						"url": "http://127.0.0.1:8000/api/v1/Accounts/1?include=reactInComment",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:8000/api/v1/Accounts/1?include=voteInPoll",
+					"request": {
+						"url": "http://127.0.0.1:8000/api/v1/Accounts/1?include=voteInPoll",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:8000/api/v1/Accounts?id=1&firstName=Zaria&lastName=Rice&Email=vconn@halvorson.biz&showEmail=1&xCoordinate=0&yCoordinate=0",
+					"request": {
+						"url": "http://127.0.0.1:8000/api/v1/Accounts?id=1&firstName=Zaria&lastName=Rice&Email=vconn@halvorson.biz&showEmail=1&xCoordinate=0s&yCoordinate=0",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Clauses"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
