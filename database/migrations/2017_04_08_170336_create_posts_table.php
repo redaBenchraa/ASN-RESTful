@@ -16,7 +16,7 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('content');
-            $table->binary('Image');
+            $table->binary('Image')->nullable();
             $table->binary('File')->nullable();;
             $table->smallInteger('Type');
             $table->dateTime('postingDate');

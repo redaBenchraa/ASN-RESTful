@@ -37,7 +37,7 @@ class ConversationService extends serviceBP {
         foreach ($Conversations as $Conversation){
             $entry = [
                 'id' => $Conversation->id,
-                'lastMessage' => $Conversation->containMessage->pluck('Content')->first(),
+                'lastMessage' => $Conversation->containMessage->first(),
                 'href' => route('Conversations.show',['id'=>$Conversation->id]),
             ];
 

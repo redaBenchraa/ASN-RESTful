@@ -57,10 +57,20 @@ class GrpsServices extends serviceBP {
             if(in_array('createdBy',$withKeys)){
                 $groupOwner = $Grp->createdBy;
                 $entry['owner'] = [
+                    // 'id' => $groupOwner->id,
+                    // 'firstName' => $groupOwner->firstName,
+                    // 'lastName' => $groupOwner->lastName,
+                    //'href' => $groupOwner->route('Accounts.show',['id'=>$groupOwner->id]),
                     'id' => $groupOwner->id,
                     'firstName' => $groupOwner->firstName,
                     'lastName' => $groupOwner->lastName,
-                    'href' => $this->getAccountRoute($groupOwner),
+                    //'href' => $this->getAccountRoute($groupOwner),
+                    'Email' => $groupOwner->Email,
+                    'About' => $groupOwner->About,
+                    'showEmail' => $groupOwner->showEmail,
+                    'Image' => $groupOwner->Image,
+                    'xCoordinate' => $groupOwner->xCoordinate,
+                    'yCoordinate' => $groupOwner->yCoordinate,
                 ];
             }
 
@@ -69,10 +79,20 @@ class GrpsServices extends serviceBP {
                 $AdminsList = [];
                 foreach ($Admins as $Admin) {
                     $anAdmin = [
+                        //'id' => $Admin->id,
+                        //'firstName' => $Admin->firstName,
+                        //'lastName' => $Admin->lastName,
                         'id' => $Admin->id,
                         'firstName' => $Admin->firstName,
                         'lastName' => $Admin->lastName,
-                        'href' => $this->getAccountRoute($Admin),
+                        //'href' => $this->getAccountRoute($Admin),
+                        'Email' => $Admin->Email,
+                        'About' => $Admin->About,
+                        'showEmail' => $Admin->showEmail,
+                        'Image' => $Admin->Image,
+                        'xCoordinate' => $Admin->xCoordinate,
+                        'yCoordinate' => $Admin->yCoordinate,                       
+                       // 'href' => $Admin->route('Accounts.show',['id'=>$Admin->id]),
                     ];
                     $AdminsList[] = $anAdmin;
                 }
@@ -83,10 +103,20 @@ class GrpsServices extends serviceBP {
                 $MembersList = [];
                 foreach ($Members as $member) {
                     $aMember = [
+                        //'id' => $member->id,
+                        //'firstName' => $member->firstName,
+                        //'lastName' => $member->lastName,
+                        // 'href' => $member->route('Accounts.show',['id'=>$Admin->id]),
                         'id' => $member->id,
                         'firstName' => $member->firstName,
                         'lastName' => $member->lastName,
-                        'href' => $this->getAccountRoute($member),
+                        //'href' => $this->getAccountRoute($member),
+                        'Email' => $member->Email,
+                        'About' => $member->About,
+                        'showEmail' => $member->showEmail,
+                        'Image' => $member->Image,
+                        'xCoordinate' => $member->xCoordinate,
+                        'yCoordinate' => $member->yCoordinate,
                     ];
                     $MembersList[] = $aMember;
                 }

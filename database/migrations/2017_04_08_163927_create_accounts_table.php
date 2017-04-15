@@ -20,7 +20,7 @@ class CreateAccountsTable extends Migration
             $table->string('Email');
             $table->string('About');
             $table->boolean('showEmail');
-            $table->binary('Image');
+            $table->binary('Image')->nullable();
             $table->float('xCoordinate');
             $table->float('yCoordinate');
             $table->timestamps();

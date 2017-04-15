@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,17 +10,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $faker  = \Faker\Factory::create() ; // Faker generator
+        $seeder = new \App\Services\v1\seedNumber();  // seeder default numbers
 
+        /*factory(\App\Account::class, $seeder->accountNumber)->create();
+        factory(\App\Grp::class, $seeder->groupNumber)->create();
+        factory(\App\Poll::class, $seeder->pollNumber)->create();
+        factory(\App\Post::class, $seeder->postNumber)->create();
+        factory(\App\Comment::class, $seeder->commentNumber)->create();
+        factory(\App\Message::class, $seeder->messageNumber)->create();
+        factory(\App\Notification::class, $seeder->notificationNumber)->create();
+        factory(\App\MessageNotification::class, $seeder->messageNotificationNumber)->create();
+        factory(\App\Conversation::class, $seeder->conversationNumber)->create();
 
-        // $this->call(UsersTableSeeder::class);
-        /*factory(\App\Account::class, 100)->create();
-        factory(\App\Grp::class, 20)->create();
-        factory(\App\Post::class, 10)->create();
-        factory(\App\Comment::class, 30)->create();
-        factory(\App\Message::class, 30)->create();
-        factory(\App\Notification::class, 40)->create();
-        factory(\App\MessageNotification::class, 40)->create();
-        factory(\App\Conversation::class, 30)->create();
 
         $conversationIds= DB::table('conversations')->pluck('id');
         $accountIds= DB::table('accounts')->pluck('id');
@@ -32,16 +33,16 @@ class DatabaseSeeder extends Seeder
             $array = iterator_to_array($randomizedCarIds);
             var_dump($randomizedCarIds);
             shuffle($array);
-            for($index = 0; $index < 3; $index++) {
+            for($index = 0; $index < 5; $index++) {
                 $pivots[] = [
                     'Conversation_id' => $conversationId,
                     'Account_id' => array_shift($array)
                 ];
             }
         }
-        DB::table('account_conversation')->insert($pivots);*/
+        DB::table('account_conversation')->insert($pivots);
 
-        /*$groupIds= DB::table('grps')->pluck('id');
+        $groupIds= DB::table('grps')->pluck('id');
         $accountIds= DB::table('accounts')->pluck('id');
         $pivots = [];
         foreach($groupIds as $groupId)
@@ -49,15 +50,16 @@ class DatabaseSeeder extends Seeder
             $randomizedCarIds = $accountIds;
             $array = iterator_to_array($randomizedCarIds);
             shuffle($array);
-            for($index = 0; $index < 3; $index++) {
+            for($index = 0; $index < 5; $index++) {
                    $pivots[] = [
                         'Grp_id' => $groupId,
                         'Account_id' => array_shift($array)
                    ];
             }
         }
-        DB::table('grp_account')->insert($pivots);*/
-        /*$groupIds= DB::table('grps')->pluck('id');
+        DB::table('grp_account')->insert($pivots);
+
+        $groupIds= DB::table('grps')->pluck('id');
         $accountIds= DB::table('accounts')->pluck('id');
         $pivots = [];
         foreach($groupIds as $groupId)
@@ -65,16 +67,16 @@ class DatabaseSeeder extends Seeder
             $randomizedCarIds = $accountIds;
             $array = iterator_to_array($randomizedCarIds);
             shuffle($array);
-            for($index = 0; $index < 3; $index++) {
+            for($index = 0; $index < 6; $index++) {
                 $pivots[] = [
                     'Grp_id' => $groupId,
                     'Account_id' => array_shift($array)
                 ];
             }
         }
-        DB::table('account_grp')->insert($pivots);*/
+        DB::table('account_grp')->insert($pivots);
 
-        /*$pollIds= DB::table('polls')->pluck('id');
+        $pollIds= DB::table('polls')->pluck('id');
         $accountIds= DB::table('accounts')->pluck('id');
         $pivots = [];
         foreach($pollIds as $pollId)
@@ -82,17 +84,17 @@ class DatabaseSeeder extends Seeder
             $randomizedCarIds = $accountIds;
             $array = iterator_to_array($randomizedCarIds);
             shuffle($array);
-            for($index = 0; $index < 5; $index++) {
+            for($index = 0; $index < 7; $index++) {
                 $pivots[] = [
                     'Poll_id' => $pollId,
                     'Account_id' => array_shift($array)
                 ];
             }
         }
-        DB::table('account_poll')->insert($pivots);*/
+        DB::table('account_poll')->insert($pivots);
 
-        factory(\App\Poll::class, 100)->create();
-        $faker  = \Faker\Factory::create() ;
+
+
         $commentIds= DB::table('comments')->pluck('id');
         $accountIds= DB::table('accounts')->pluck('id');
         $pivots = [];
@@ -105,7 +107,7 @@ class DatabaseSeeder extends Seeder
                 $pivots[] = [
                     'Comment_id' => $commentId,
                     'Account_id' => array_shift($array),
-                    'Type' => $faker->boolean
+                    'Type' => $faker->numberBetween(1,$seeder->reactionType)
                 ];
             }
         }
@@ -119,16 +121,33 @@ class DatabaseSeeder extends Seeder
             $randomizedCarIds = $accountIds;
             $array = iterator_to_array($randomizedCarIds);
             shuffle($array);
-            for($index = 0; $index < 100; $index++) {
+                for($index = 0; $index < 100; $index++) {
                 $pivots[] = [
                     'Post_id' => $postId,
                     'Account_id' => array_shift($array),
-                    'Type' => $faker->boolean
+                    'Type' => $faker->numberBetween(1,$seeder->reactionType)
 
                 ];
             }
         }
         DB::table('account_post')->insert($pivots);
+
+        $pollIds= DB::table('polls')->pluck('id');
+        $accountIds= DB::table('accounts')->pluck('id');
+        $pivots = [];
+        foreach($pollIds as $pollId)
+        {
+            $randomizedCarIds = $accountIds;
+            $array = iterator_to_array($randomizedCarIds);
+            shuffle($array);
+            for($index = 0; $index < 100; $index++) {
+                $pivots[] = [
+                    'poll_id' => $pollId,
+                    'Account_id' => array_shift($array),
+                ];
+            }
+        }
+        DB::table('account_poll')->insert($pivots);*/
 
     }
 }

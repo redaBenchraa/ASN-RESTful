@@ -13,6 +13,6 @@ class Comment extends Model
         return $this->belongsTo('App\Account');
     }
     public function reactingAccounts(){
-        return $this->belongsToMany('App\Account','account_comment','Comment_id','Account_id');
+        return $this->belongsToMany('App\Account','account_comment','Comment_id','Account_id')->withPivot('type');
     }
 }

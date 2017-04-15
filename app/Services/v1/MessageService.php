@@ -47,7 +47,7 @@ class MessageService extends serviceBP {
             ];
             if(in_array('sentBy',$withKeys)){
                 $Account = $Message->sentBy;
-                $entry['account'] = [
+                $entry['Account'] = [
                     'id' => $Account->id,
                     'firstName' => $Account->firstName,
                     'lastName' => $Account->lastName,
@@ -61,7 +61,7 @@ class MessageService extends serviceBP {
             }
             if(in_array('belongsToConversation',$withKeys)){
                 $Conversation = $Message->belongsToConversation;
-                $entry['conversation'] = [
+                $entry['Conversation'] = [
                     'id' => $Conversation->id,
                     'lastMessage' => $Conversation->containMessage->pluck('Content')->first(),
                 ];
