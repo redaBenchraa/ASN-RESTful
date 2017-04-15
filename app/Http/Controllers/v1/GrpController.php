@@ -4,7 +4,10 @@ namespace App\Http\Controllers\v1;
 
 use App\Services\v1\GrpsServices;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Controllers\Controller;
+use Mockery\Exception;
+use App\Grp;
 
 class GrpController extends Controller
 {
@@ -43,7 +46,12 @@ class GrpController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $Grp = $this->Grps->createGroup($request);
+            return response()->json($Grp,201);
+        }catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);;
+        }
     }
 
     /**
@@ -81,7 +89,15 @@ class GrpController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $Grp = $this->Grps->updateGroup($request,$id);
+            return response()->json($Grp,200);
+        }catch (ModelNotFoundException $ex){
+            throw $ex;
+        }
+        catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);
+        }
     }
 
     /**
@@ -92,6 +108,40 @@ class GrpController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $Grp = $this->Grps->deleteGroup($id);
+            return response()->json('',204);
+        }catch (ModelNotFoundException $ex){
+            throw $ex;
+        }
+        catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);
+        }
+    }
+
+    public function addAdmin(Request $req,$id){
+        $group = Grp::find($id);
+        $adminId = $req->input('adminId');
+        $group->administratedBy()->attach($adminId);
+
+    }
+
+    public function removeAdmin(Request $req,$id){
+        $group = Grp::find($id);
+        $adminId = $req->input('adminId');
+        $group->administratedBy()->detach($adminId);
+
+    }
+
+    public function addMember(Request $req,$id){
+        $group = Grp::find($id);
+        $memberId = $req->input('memberId');
+        $group->containMembers()->attach($memberId);
+    }
+
+    public function removeMember(Request $req,$id){
+        $group = Grp::find($id);
+        $memberId = $req->input('memberId');
+        $group->containMembers()->detach($memberId);
     }
 }

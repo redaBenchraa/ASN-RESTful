@@ -11,7 +11,7 @@ class Grp extends Model
     }
 
     public function haveSuperGroup(){
-        return $this->belongsTo('App\Grp');
+        return $this->belongsTo('App\Grp','Grp_id');
     }
 
     public function haveSubGroup(){
@@ -29,4 +29,6 @@ class Grp extends Model
     public function containMembers(){
         return $this->belongsToMany('App\Account','grp_account','Grp_id','Account_id');
     }
+    protected $fillable = ['Name','creationDate','Image','About','Account_id','Grp_id'];
+
 }

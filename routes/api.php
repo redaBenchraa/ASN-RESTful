@@ -26,6 +26,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Routs for managing the pivot tables
+Route::post('/v1/Groups/{id}/addAdmin',['uses'=>'v1\\GrpController@addAdmin']);
+Route::post('/v1/Groups/{id}/removeAdmin',['uses'=>'v1\\GrpController@removeAdmin']);
+Route::post('/v1/Groups/{id}/addMember',['uses'=>'v1\\GrpController@addMember']);
+Route::post('/v1/Groups/{id}/removeMember',['uses'=>'v1\\GrpController@removeMember']);
+
+
 
 Route::resource('/v1/Accounts', AccountController::class);
 Route::resource('/v1/Groups', GrpController::class);

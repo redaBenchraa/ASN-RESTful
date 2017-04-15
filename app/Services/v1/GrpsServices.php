@@ -19,13 +19,18 @@ class GrpsServices extends serviceBP {
         'administratedBy' => 'admins',
         'containMembers' => 'members',
         'contain' => 'posts',
+        'haveSuperGroup' => 'super',
+        'haveSubGroup' =>'subs'
     ];
 
     protected $clauseProprieties = [
         'id' => 'id',
-        'Account_id' => 'owned'
-        //super group
+        'Account_id' => 'owned',
+        'Name' => 'named'
     ];
+
+    protected $tableFields = ['Name','creationDate','Image','About','Account_id','Grp_id'];
+
 
     public function getGrps($params){
             $withKeys = [];
@@ -55,7 +60,7 @@ class GrpsServices extends serviceBP {
                     'id' => $groupOwner->id,
                     'firstName' => $groupOwner->firstName,
                     'lastName' => $groupOwner->lastName,
-                    //'href' => $groupOwner->route('Accounts.show',['id'=>$groupOwner->id]),
+                    'href' => $this->getAccountRoute($groupOwner),
                 ];
             }
 
@@ -67,7 +72,7 @@ class GrpsServices extends serviceBP {
                         'id' => $Admin->id,
                         'firstName' => $Admin->firstName,
                         'lastName' => $Admin->lastName,
-                       // 'href' => $Admin->route('Accounts.show',['id'=>$Admin->id]),
+                        'href' => $this->getAccountRoute($Admin),
                     ];
                     $AdminsList[] = $anAdmin;
                 }
@@ -81,12 +86,27 @@ class GrpsServices extends serviceBP {
                         'id' => $member->id,
                         'firstName' => $member->firstName,
                         'lastName' => $member->lastName,
-                        // 'href' => $member->route('Accounts.show',['id'=>$Admin->id]),
+                        'href' => $this->getAccountRoute($member),
                     ];
                     $MembersList[] = $aMember;
                 }
                 $entry['members'] = $MembersList;
             }
+
+            if(in_array('haveSuperGroup',$withKeys)){
+                $entry['super'] =  $Grp->haveSuperGroup;
+            }
+
+            if(in_array('haveSubGroup',$withKeys)){
+                $SubGrps = $Grp->haveSubGroup;
+                $SubGrpsList = [];
+                foreach ($SubGrps as $subGrp) {
+                    $SubGrpsList [] = $subGrp;
+                }
+                $entry['subs'] =  $SubGrpsList;
+            }
+
+
             if(in_array('contain',$withKeys)){
                 $Posts = $Grp->contain;
                 $PostsList = [];
@@ -126,5 +146,47 @@ class GrpsServices extends serviceBP {
             $data[] = $entry;
         }
         return $data;
+    }
+
+    public function createGroup($req){
+        $Grp = new Grp();
+        $Grp->Name = $req->input('Name');
+        $Grp->creationDate = $req->input('creationDate');
+        $Grp->Image = $req->input('Image');
+        $Grp->About = $req->input('About');
+        $Grp->Account_id = $req->input('Account_id');
+        $Grp->Grp_id = $req->input('Grp_id');
+        $Grp->save();
+        return $Grp;
+    }
+
+    public function updateGroup($req,$id){
+        $Grp = Grp::find($id);
+        foreach ($this->tableFields as $field){
+            if(isset($req[$field])){
+                $Grp->fill([$field => $req[$field]]);
+            }
+        }
+        $Grp->save();
+        return $Grp;
+    }
+    public function deleteGroup($id){
+        //delete group and all it's sub groups
+        //delete all posts in a group and comments related to them
+        //delete all pivot data such as Members and admins
+        $Grp = Grp::find($id);
+        //$Grp->administratedBy()->detach();
+        //$Grp->containMembers()->detach();
+        $Grps = Grp::where('Grp_id',$id);
+        foreach ($Grps as $grp){
+            //$Grp->administratedBy()->detach();
+            //$Grp->containMembers()->detach();
+        }
+
+
+    }
+
+    public function deleteRelatedData($id){
+
     }
 }

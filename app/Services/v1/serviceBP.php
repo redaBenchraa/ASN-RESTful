@@ -49,4 +49,33 @@ class serviceBP
         }
         return  $withKeys;
     }
+
+    protected function getAccountRoute($Account){
+        return route('Accounts.show',['id'=>$Account->id]);
+    }
+    protected function getCommentRoute($Comment){
+        return route('Comment.show',['id'=>$Comment->id]);
+    }
+    protected function getConversationRoute($Conversation){
+        return route('Conversation.show',['id'=>$Conversation->id]);
+    }
+    protected function getGrpRoute($Grp){
+        return route('Groups.show',['id'=>$Grp->id]);
+    }
+    protected function getMessageRoute($Message){
+        return route('Messages.show',['id'=>$Message->id]);
+    }
+    protected function getMessageNotificationRoute($MessageNotification){
+        return route('MessageNotifications.show',['id'=>$MessageNotification->id]);
+    }
+    protected function getNotificationRoute($Notification){
+        return route('Notifications.show',['id'=>$Notification->id]);
+    }
+    protected function getPollRoute($Poll){
+        return route('Polls.show',['id'=>$Poll->id]);
+    }
+    protected function getPostRoute($Post){
+        return route('Posts.show',['id'=>$Post->id]);
+    }
+
 }
