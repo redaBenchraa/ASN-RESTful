@@ -14,17 +14,18 @@ class CreateGrpsTable extends Migration
     public function up()
     {
         Schema::create('grps', function (Blueprint $table) {
+
             $table->increments('id');
             $table->string('Name');
             $table->date('creationDate');
             $table->binary('Image')->nullable();
             $table->text('About');
-            $table->integer('Account_id');
-            $table->integer('Grp_id');
-            $table->foreign('Account_id')->references('id')->on('Account');
-            $table->foreign('Grp_id')->references('id')->on('Grp')->onCascade('delete');
+            $table->unsignedInteger('Account_id');
+            $table->unsignedInteger('Grp_id');
             $table->timestamps();
         });
+
+
     }
 
     /**

@@ -18,10 +18,8 @@ class CreateMessageNotificationsTable extends Migration
             $table->text('Content');
             $table->boolean('Seen');
             $table->timestamps();
-            $table->integer('Account_id');
-            $table->integer('Message_id');
-            $table->foreign('Message_id')->references('id')->on('Message')->onDelete('cascade');
-            $table->foreign('Account_id')->references('id')->on('Account');
+            $table->unsignedInteger('Account_id');
+            $table->unsignedInteger('Message_id');
 
 
         });

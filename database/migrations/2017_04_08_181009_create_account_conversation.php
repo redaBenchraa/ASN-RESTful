@@ -15,10 +15,9 @@ class CreateAccountConversation extends Migration
     {
         Schema::create('account_conversation', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('Account_id');
-            $table->integer('Conversation_id');
-            $table->foreign('Account_id')->references('id')->on('Account')->onDelete('cascade');
-            $table->foreign('Conversation_id')->references('id')->on('Conversation')->onDelete('cascade');
+            $table->unsignedInteger('Account_id');
+            $table->unsignedInteger('Conversation_id');
+
 
         });
     }
