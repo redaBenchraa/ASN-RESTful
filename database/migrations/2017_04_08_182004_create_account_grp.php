@@ -17,6 +17,9 @@ class CreateAccountGrp extends Migration
             $table->increments('id');
             $table->integer('Account_id');
             $table->integer('Grp_id');
+            $table->foreign('Account_id')->references('id')->on('Account')->onDelete('cascade');
+            $table->foreign('Grp_id')->references('id')->on('Grp')->onDelete('cascade');
+
         });
     }
 

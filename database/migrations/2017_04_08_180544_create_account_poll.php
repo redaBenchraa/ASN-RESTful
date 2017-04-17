@@ -17,6 +17,9 @@ class CreateAccountPoll extends Migration
             $table->increments('id');
             $table->integer('Account_id');
             $table->integer('Poll_id');
+            $table->foreign('Account_id')->references('id')->on('Account')->onDelete('cascade');
+            $table->foreign('Poll_id')->references('id')->on('Poll')->onDelete('cascade');
+
         });
     }
 

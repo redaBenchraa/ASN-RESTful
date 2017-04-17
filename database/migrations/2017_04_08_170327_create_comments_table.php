@@ -21,7 +21,8 @@ class CreateCommentsTable extends Migration
             $table->smallInteger('Popularity');
             $table->integer('Account_id');
             $table->integer('Post_id');
-
+            $table->foreign('Account_id')->references('id')->on('Account');
+            $table->foreign('Post_id')->references('id')->on('Post')->onCascade('delete');
             $table->timestamps();
         });
     }

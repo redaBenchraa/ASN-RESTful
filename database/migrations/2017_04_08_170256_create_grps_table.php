@@ -21,6 +21,8 @@ class CreateGrpsTable extends Migration
             $table->text('About');
             $table->integer('Account_id');
             $table->integer('Grp_id');
+            $table->foreign('Account_id')->references('id')->on('Account');
+            $table->foreign('Grp_id')->references('id')->on('Grp')->onCascade('delete');
             $table->timestamps();
         });
     }

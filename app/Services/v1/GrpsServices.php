@@ -11,6 +11,7 @@ namespace App\Services\v1;
 use App\Grp;
 use App\Account;
 use App\Http\Controllers\v1\AccountController;
+use App\Services\v1\PostService;
 
 
 class GrpsServices extends serviceBP {
@@ -201,22 +202,6 @@ class GrpsServices extends serviceBP {
         return $Grp;
     }
     public function deleteGroup($id){
-        //delete group and all it's sub groups
-        //delete all posts in a group and comments related to them
-        //delete all pivot data such as Members and admins
-        $Grp = Grp::find($id);
-        //$Grp->administratedBy()->detach();
-        //$Grp->containMembers()->detach();
-        $Grps = Grp::where('Grp_id',$id);
-        foreach ($Grps as $grp){
-            //$Grp->administratedBy()->detach();
-            //$Grp->containMembers()->detach();
-        }
-
-
-    }
-
-    public function deleteRelatedData($id){
-
+        Grp::find($id)->delete();
     }
 }

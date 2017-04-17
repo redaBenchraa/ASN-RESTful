@@ -21,6 +21,9 @@ class CreateNotificationsTable extends Migration
             $table->timestamps();
             $table->integer('Account_id');
             $table->integer('Post_id');
+            $table->foreign('Account_id')->references('id')->on('Account')->onDelete('cascade');
+            $table->foreign('Post_id')->references('id')->on('Post')->onDelete('cascade');
+
 
         });
     }

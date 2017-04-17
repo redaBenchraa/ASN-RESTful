@@ -124,4 +124,8 @@ class PostService  extends serviceBP {
         }
         return $data;
     }
+
+    public function deletePost($id){
+
+    }
 }

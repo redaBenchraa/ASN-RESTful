@@ -20,6 +20,8 @@ class CreateMessageNotificationsTable extends Migration
             $table->timestamps();
             $table->integer('Account_id');
             $table->integer('Message_id');
+            $table->foreign('Message_id')->references('id')->on('Message')->onDelete('cascade');
+            $table->foreign('Account_id')->references('id')->on('Account');
 
 
         });

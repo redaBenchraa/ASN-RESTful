@@ -18,6 +18,9 @@ class CreateAccountPost extends Migration
             $table->integer('Account_id');
             $table->integer('Post_id');
             $table->smallInteger('Type');
+            $table->foreign('Account_id')->references('id')->on('Account')->onDelete('cascade');
+            $table->foreign('Post_id')->references('id')->on('Post')->onDelete('cascade');
+
 
         });
     }

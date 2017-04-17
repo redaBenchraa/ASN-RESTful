@@ -23,6 +23,8 @@ class CreatePostsTable extends Migration
             $table->smallInteger('popularity');
             $table->integer('Account_id');
             $table->integer('Grp_id');
+            $table->foreign('Account_id')->references('id')->on('Account');
+            $table->foreign('Grp_id')->references('id')->on('Grp')->onCascade('delete');
             $table->timestamps();
 
         });
