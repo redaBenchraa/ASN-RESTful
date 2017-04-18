@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\v1;
 
 use App\Services\v1\CommentService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Mockery\Exception;
+use App\Comment;
 
 class ComentController extends Controller
 {
@@ -104,6 +107,25 @@ class ComentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+        $comment = $this->Comments->deleteComment($id);
+        return response()->json('',204);
+    }catch (ModelNotFoundException $ex){
+        throw $ex;
+    }
+        catch(Exception $e){
+        return  response()->json(['error'=>$e->getMessage()],500);
+    }
+    }
+    public function reactedToBy(Request $req,$id){
+        $comment = Comment::find($id);
+        $accountId =  $req->input('accountId');
+        $Type = $req->input('type');
+        $comment->reactingAccounts()->attach($accountId,['Type'=>$Type]);
+    }
+    public function removeReact(Request $req,$id){
+        $comment = Comment::find($id);
+        $accountId =  $req->input('accountId');
+        $comment->reactingAccounts()->detach($accountId);
     }
 }

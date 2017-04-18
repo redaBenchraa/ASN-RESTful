@@ -45,6 +45,10 @@ Route::post('/v1/Accounts/{id}/becomeAdmin',['uses'=>'v1\\AccountController@beco
 Route::post('/v1/Accounts/{id}/removeAdmin',['uses'=>'v1\\AccountController@removeAdmin']);
 Route::post('/v1/Accounts/{id}/becomeMember',['uses'=>'v1\\AccountController@becomeMember']);
 Route::post('/v1/Accounts/{id}/removeMember',['uses'=>'v1\\AccountController@removeMember']);
+//Comment
+Route::post('/v1/Comments/{id}/reactedToBy',['uses'=>'v1\\ComentController@reactedToBy']);
+Route::post('/v1/Comments/{id}/removeReact',['uses'=>'v1\\ComentController@removeReact']);
+
 
 
 
