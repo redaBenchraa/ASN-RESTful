@@ -72,4 +72,18 @@ class MessageService extends serviceBP {
         return $data;
     }
 
+    public function createMessage($req){
+        $message = new Message();
+        $message->Content = $req->input('Content');
+        $message->Account_id = $req->input('Account_id');
+        $message->Conversation_id = $req->input('Conversation_id');
+        $message->save();
+        return $message;
+    }
+    public function updateMessage($req,$id){
+        //don't see where it can be needed
+    }
+    public function deleteMessage($id){
+        $message = Message::find($id)->delete();
+    }
 }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\v1;
 
 use App\Services\v1\MessageService;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Controllers\Controller;
+use Mockery\Exception;
 
 class MessageController extends Controller
 {
@@ -44,7 +46,12 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $message = $this->Messages->createMessage($request);
+            return response()->json($message,201);
+        }catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);;
+        }
     }
 
     /**
@@ -81,7 +88,15 @@ class MessageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $message = $this->Messages->updateMessage($request,$id);
+            return response()->json($message,200);
+        }catch (ModelNotFoundException $ex){
+            throw $ex;
+        }
+        catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);
+        }
     }
 
     /**
@@ -92,6 +107,14 @@ class MessageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $message = $this->Messages->deleteMessage($id);
+            return response()->json('',204);
+        }catch (ModelNotFoundException $ex){
+            throw $ex;
+        }
+        catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);
+        }
     }
 }
