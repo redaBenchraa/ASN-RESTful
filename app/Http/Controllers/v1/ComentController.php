@@ -43,7 +43,12 @@ class ComentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $comment = $this->Comments->createComment($request);
+            return response()->json($comment,201);
+        }catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);
+        }
     }
 
     /**
@@ -80,7 +85,15 @@ class ComentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $comment = $this->Comments->updateComment($request,$id);
+            return response()->json($comment,200);
+        }catch (ModelNotFoundException $ex){
+            throw $ex;
+        }
+        catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);
+        }
     }
 
     /**

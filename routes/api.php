@@ -27,10 +27,25 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //Routs for managing the pivot tables
+//Grp
 Route::post('/v1/Groups/{id}/addAdmin',['uses'=>'v1\\GrpController@addAdmin']);
 Route::post('/v1/Groups/{id}/removeAdmin',['uses'=>'v1\\GrpController@removeAdmin']);
 Route::post('/v1/Groups/{id}/addMember',['uses'=>'v1\\GrpController@addMember']);
 Route::post('/v1/Groups/{id}/removeMember',['uses'=>'v1\\GrpController@removeMember']);
+//Account
+Route::post('/v1/Accounts/{id}/addConversation',['uses'=>'v1\\AccountController@addConversation']);
+Route::post('/v1/Accounts/{id}/removeConversation',['uses'=>'v1\\AccountController@removeConversation']);
+Route::post('/v1/Accounts/{id}/addPollVote',['uses'=>'v1\\AccountController@addPollVote']);
+Route::post('/v1/Accounts/{id}/removePollVote',['uses'=>'v1\\AccountController@removePollVote']);
+Route::post('/v1/Accounts/{id}/addReactInComment',['uses'=>'v1\\AccountController@addReactInComment']);
+Route::post('/v1/Accounts/{id}/removeReactInComment',['uses'=>'v1\\AccountController@removeReactInComment']);
+Route::post('/v1/Accounts/{id}/addReactInPost',['uses'=>'v1\\AccountController@addReactInPost']);
+Route::post('/v1/Accounts/{id}/removeReactInPost',['uses'=>'v1\\AccountController@removeReactInPost']);
+Route::post('/v1/Accounts/{id}/becomeAdmin',['uses'=>'v1\\AccountController@becomeAdmin']);
+Route::post('/v1/Accounts/{id}/removeAdmin',['uses'=>'v1\\AccountController@removeAdmin']);
+Route::post('/v1/Accounts/{id}/becomeMember',['uses'=>'v1\\AccountController@becomeMember']);
+Route::post('/v1/Accounts/{id}/removeMember',['uses'=>'v1\\AccountController@removeMember']);
+
 
 
 

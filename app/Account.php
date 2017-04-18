@@ -53,4 +53,5 @@ class Account extends Model
     public function belongsToGroup(){
         return $this->belongsToMany('App\Grp','grp_account','Account_id','Grp_id');
     }
+    protected $fillable = ['firstName','lastName','Email','About','showEmail','Image','xCoordinate','yCoordinate'];
 }

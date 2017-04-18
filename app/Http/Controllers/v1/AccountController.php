@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\v1;
 use App\Services\v1\AccountsService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Mockery\Exception;
+use App\Account;
+
 
 class AccountController extends Controller
 {
@@ -43,7 +47,12 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $Account = $this->Accounts->createAccount($request);
+            return response()->json($Account,201);
+        }catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);;
+        }
     }
 
     /**
@@ -80,7 +89,15 @@ class AccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $account = $this->Accounts->updateAccount($request,$id);
+            return response()->json($account,200);
+        }catch (ModelNotFoundException $ex){
+            throw $ex;
+        }
+        catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);
+        }
     }
 
     /**
@@ -91,6 +108,77 @@ class AccountController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $account = $this->Accounts->deleteAccount($id);
+            return response()->json('',204);
+        }catch (ModelNotFoundException $ex){
+            throw $ex;
+        }
+        catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);
+        }
     }
+    public function addConversation(Request $req,$id){
+        $account = Account::find($id);
+        $conversationId = $req->input('conversationId');
+        $account->participateInConversation()->attach($conversationId);
+    }
+    public function removeConversation(Request $req,$id){
+        $account = Account::find($id);
+        $conversationId = $req->input('conversationId');
+        $account->participateInConversation()->detach($conversationId);
+    }
+    public function addPollVote(Request $req,$id){
+        $account = Account::find($id);
+        $pollId= $req->input('pollId');
+        $account->voteInPoll()->attach($pollId);
+    }
+    public function removePollVote(Request $req,$id){
+        $account = Account::find($id);
+        $pollId= $req->input('pollId');
+        $account->voteInPoll()->detach($pollId);
+    }
+    public function addReactInComment(Request $req,$id){
+        $account = Account::find($id);
+        $commentId= $req->input('commentId');
+        $account->reactInComment()->attach($commentId);
+    }
+    public function removeReactInComment(Request $req,$id){
+        $account = Account::find($id);
+        $commentId= $req->input('commentId');
+        $account->reactInComment()->detach($commentId);
+    }
+    public function addReactInPost(Request $req,$id){
+        $account = Account::find($id);
+        $postId= $req->input('postId');
+        $account->reactInPost()->attach($postId);
+    }
+    public function removeReactInPost(Request $req,$id){
+        $account = Account::find($id);
+        $postId= $req->input('postId');
+        $account->reactInPost()->detach($postId);
+    }
+    public function becomeAdmin(Request $req,$id){
+        $account = Account::find($id);
+        $groupId= $req->input('groupId');
+        $account->administrate()->attach($groupId);
+    }
+    public function removeAdmin(Request $req,$id){
+        $account = Account::find($id);
+        $groupId= $req->input('groupId');
+        $account->administrate()->detach($groupId);
+    }
+    public function becomeMember(Request $req,$id){
+        $account = Account::find($id);
+        $groupId= $req->input('groupId');
+        $account->belongsToGroup()->attach($groupId);
+    }
+    public function removeMember(Request $req,$id){
+        $account = Account::find($id);
+        $groupId= $req->input('groupId');
+        $account->belongsToGroup()->detach($groupId);
+    }
+
+
+
 }

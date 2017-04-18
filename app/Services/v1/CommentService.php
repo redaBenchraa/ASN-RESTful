@@ -27,6 +27,9 @@ class CommentService extends serviceBP {
         'Post_id' => 'post',
     ];
 
+    protected $tableFields = ['Content','File','Type','Popularity',];
+
+
     public function getComments($params){
         $withKeys = [];
         $whereClauses = [];
@@ -91,4 +94,31 @@ class CommentService extends serviceBP {
         }
         return $data;
     }
+
+    public function createComment($req){
+        $comment = new Comment();
+        $comment->Content = $req->input('Content');
+        $comment->File = $req->input('File');
+        $comment->Type = $req->input('Type');
+        $comment->Popularity = $req->input('Popularity');
+        $comment->Account_id = $req->input('Account_id');
+        $comment->Post_id = $req->input('Post_id');
+        $comment->save();
+        return $comment;
+    }
+
+    public function updateComment($req,$id){
+        $comment = Comment::find($id);
+        foreach ($this->tableFields as $field){
+            if(isset($req[$field])){
+                $comment->fill([$field => $req[$field]]);
+            }
+        }
+        $comment->save();
+        return $comment;
+    }
+    public function deleteComment($id){
+        Comment::find($id)->delete();
+    }
+
 }

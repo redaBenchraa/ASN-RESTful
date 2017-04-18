@@ -15,4 +15,5 @@ class Comment extends Model
     public function reactingAccounts(){
         return $this->belongsToMany('App\Account','account_comment','Comment_id','Account_id')->withPivot('type');
     }
+    protected $fillable = ['Content','File','Type','Popularity',];
 }

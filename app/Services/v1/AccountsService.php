@@ -28,6 +28,7 @@ class AccountsService extends serviceBP {
         'xCoordinate' => 'xCoordinate',
         'yCoordinate' => 'yCoordinate',
     ];
+    protected  $tableFields = ['firstName','lastName','Email','About','showEmail','Image','xCoordinate','yCoordinate'];
     public function getAccounts($params){
         $withKeys = [];
         if(empty($params)){
@@ -214,6 +215,34 @@ class AccountsService extends serviceBP {
             $data[] = $entry;
         }
         return $data;
+    }
+
+    public function createAccount($req){
+        $account = new Account();
+        $account->firstName = $req->input('firstName');
+        $account->lastName = $req->input('lastName');
+        $account->Email = $req->input('Email');
+        $account->About = $req->input('About');
+        $account->showEmail = $req->input('showEmail');
+        $account->Image = $req->input('Image');
+        $account->xCoordinate = $req->input('xCoordinate');
+        $account->yCoordinate = $req->input('yCoordinate');
+        $account->save();
+        return $account;
+    }
+
+    public function updateAccount($req,$id){
+        $account = Account::find($id);
+        foreach ($this->tableFields as $field){
+            if(isset($req[$field])){
+                $account->fill([$field => $req[$field]]);
+            }
+        }
+        $account->save();
+        return $account;
+    }
+    public function deleteAccount($id){
+        Account::find($id)->delete();
     }
 
 }
