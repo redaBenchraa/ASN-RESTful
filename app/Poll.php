@@ -13,4 +13,5 @@ class Poll extends Model
     public function voters(){
         return $this->belongsToMany('App\Account','account_poll','Poll_id','Account_id');
     }
+    protected $fillable = ['Vote'];
 }

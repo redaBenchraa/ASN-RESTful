@@ -22,6 +22,8 @@ class PollService extends serviceBP {
         'Post_id' => 'post',
     ];
 
+    protected $tableFields = ['Vote'];
+
     public function getPolls($params){
         $withKeys = [];
         $whereClauses = [];
@@ -70,5 +72,27 @@ class PollService extends serviceBP {
             $data[] = $entry;
         }
         return $data;
+    }
+
+    public function createPoll($req){
+        $poll = new Poll();
+        $poll->Content = $req->input('Content');
+        $poll->Vote = 0;
+        $poll->Post_id = $req->input('Post_id');
+        $poll->save();
+        return $poll;
+    }
+    public function updatePoll($req,$id){
+        $poll = Poll::find($id);
+        foreach ($this->tableFields as $field){
+            if(isset($req[$field])){
+                $poll->fill([$field => $req[$field]]);
+            }
+        }
+        $poll->save();
+        return $poll;
+    }
+    public function deletePoll($id){
+        Poll::find($id)->delete();
     }
 }

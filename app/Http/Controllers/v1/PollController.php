@@ -4,7 +4,10 @@ namespace App\Http\Controllers\v1;
 
 use App\Services\v1\PollService;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Controllers\Controller;
+use Mockery\Exception;
+use App\Poll;
 
 class PollController extends Controller
 {
@@ -43,7 +46,12 @@ class PollController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $poll = $this->Polls->createPoll($request);
+            return response()->json($poll,201);
+        }catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);;
+        }
     }
 
     /**
@@ -80,7 +88,15 @@ class PollController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $poll = $this->Polls->updatePoll($request,$id);
+            return response()->json($poll,200);
+        }catch (ModelNotFoundException $ex){
+            throw $ex;
+        }
+        catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);
+        }
     }
 
     /**
@@ -91,6 +107,24 @@ class PollController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $poll = $this->Polls->deletePoll($id);
+            return response()->json('',204);
+        }catch (ModelNotFoundException $ex){
+            throw $ex;
+        }
+        catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);
+        }
+    }
+    public function addVoter(Request $request,$id){
+        $poll = Poll::find($id);
+        $accountId = $request->input('accountId');
+        $poll->voters()->attach($accountId);
+    }
+    public function removeVoter(Request $request,$id){
+        $poll = Poll::find($id);
+        $accountId = $request->input('accountId');
+        $poll->voters()->detach($accountId);
     }
 }
