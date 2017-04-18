@@ -13,4 +13,6 @@ class Notification extends Model
     public function relatesToPost(){
         return $this->belongsTo('App\Post','Post_id');
     }
+
+    protected $fillable = ['Seen'];
 }

@@ -22,6 +22,8 @@ class NotificationService extends serviceBP{
         'account_id' => 'account'
     ];
 
+    protected $tableFields = ['Seen'];
+
     public function getNotifications($params){
         $withKeys = [];
         if(empty($params)){
@@ -53,5 +55,29 @@ class NotificationService extends serviceBP{
             $data [] = $entry;
         }
         return $data;
+    }
+
+    public function createNotification($req){
+        $notification = new Notification();
+        $notification->Content = $req->input('Content');
+        $notification->Seen = $req->input('Seen');
+        $notification->dateAndTime = $req->input('dateAndTime');
+        $notification->Account_id = $req->input('Account_id');
+        $notification->Post_id = $req->input('Post_id');
+        $notification->save();
+        return $notification;
+    }
+    public function updateNotification($req,$id){
+        $notification = Notification::find($id);
+        foreach ($this->tableFields as $field){
+            if(isset($req[$field])){
+                $notification->fill([$field => $req[$field]]);
+            }
+        }
+        $notification->save();
+        return $notification;
+    }
+    public function deleteNotification($id){
+        $notification = Notification::find($id)->delete();
     }
 }
