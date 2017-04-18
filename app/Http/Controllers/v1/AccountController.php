@@ -141,7 +141,8 @@ class AccountController extends Controller
     public function addReactInComment(Request $req,$id){
         $account = Account::find($id);
         $commentId= $req->input('commentId');
-        $account->reactInComment()->attach($commentId);
+        $Type = $req->input('type');
+        $account->reactInComment()->attach($commentId,['Type'=>$Type]);
     }
     public function removeReactInComment(Request $req,$id){
         $account = Account::find($id);
@@ -151,12 +152,13 @@ class AccountController extends Controller
     public function addReactInPost(Request $req,$id){
         $account = Account::find($id);
         $postId= $req->input('postId');
-        $account->reactInPost()->attach($postId);
+        $Type = $req->input('type');
+        $account->reactsInPost()->attach($postId,['Type'=>$Type]);
     }
     public function removeReactInPost(Request $req,$id){
         $account = Account::find($id);
         $postId= $req->input('postId');
-        $account->reactInPost()->detach($postId);
+        $account->reactsInPost()->detach($postId);
     }
     public function becomeAdmin(Request $req,$id){
         $account = Account::find($id);
