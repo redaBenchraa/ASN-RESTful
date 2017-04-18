@@ -15,10 +15,9 @@ class CreateAccountPoll extends Migration
     {
         Schema::create('account_poll', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('Account_id');
-            $table->integer('Poll_id');
-            $table->foreign('Account_id')->references('id')->on('Account')->onDelete('cascade');
-            $table->foreign('Poll_id')->references('id')->on('Poll')->onDelete('cascade');
+            $table->unsignedInteger('Account_id');
+            $table->unsignedInteger('Poll_id');
+
 
         });
     }

@@ -21,10 +21,9 @@ class CreatePostsTable extends Migration
             $table->smallInteger('Type');
             $table->dateTime('postingDate');
             $table->smallInteger('popularity');
-            $table->integer('Account_id');
-            $table->integer('Grp_id');
-            $table->foreign('Account_id')->references('id')->on('Account');
-            $table->foreign('Grp_id')->references('id')->on('Grp')->onCascade('delete');
+            $table->unsignedInteger('Account_id');
+            $table->unsignedInteger('Grp_id');
+
             $table->timestamps();
 
         });

@@ -22,8 +22,20 @@ $factory->define(\App\Grp::class, function (Faker\Generator $faker) {
         'Image' => null,
         'creationDate' => $faker->dateTime,
         'About' => $faker->word(50),
-        'Grp_id' => $faker->numberBetween(1,$seeder->groupNumber),
-        'Account_id' => $faker->numberBetween(1,$seeder->accountNumber),
+        'Grp_id' => random_int(\DB::table('grps')->min('id'), \DB::table('grps')->max('id')),
+        'Account_id' =>random_int(\DB::table('accounts')->min('id'), \DB::table('accounts')->max('id')),
+    ];
+});
+
+$factory->define(\App\Grp::class, function (Faker\Generator $faker) {
+    $seeder = new seedNumber();
+    return [
+        'Name' => $faker->name,
+        'Image' => null,
+        'creationDate' => $faker->dateTime,
+        'About' => $faker->word(50),
+        'Grp_id' => random_int(\DB::table('grps')->min('id'), \DB::table('grps')->max('id')),
+        'Account_id' =>random_int(\DB::table('accounts')->min('id'), \DB::table('accounts')->max('id')),
     ];
 });
 $factory->define(\App\Message::class, function (Faker\Generator $faker) {
@@ -32,7 +44,7 @@ $factory->define(\App\Message::class, function (Faker\Generator $faker) {
     return [
         'content' => $faker->word(100),
         'Account_id' => $faker->numberBetween(1,$seeder->accountNumber),
-        'Conversation_id' => $faker->numberBetween(1,$seeder->conversationNumber)
+        'Conversation_id' => random_int(\DB::table('conversations')->min('id'), \DB::table('conversations')->max('id')),
     ];
 });
 $factory->define(\App\Post::class, function (Faker\Generator $faker) {
@@ -44,8 +56,8 @@ $factory->define(\App\Post::class, function (Faker\Generator $faker) {
         'Type' => $faker->numberBetween(1,$seeder->postType),
         'postingDate' => $faker->dateTime,
         'Popularity' => $faker->randomNumber(3),
-        'Account_id' => $faker->numberBetween(1,$seeder->accountNumber),
-        'Grp_id' => $faker->numberBetween(1,$seeder->groupNumber)
+        'Account_id' => random_int(\DB::table('accounts')->min('id'), \DB::table('accounts')->max('id')),
+        'Grp_id' =>random_int(\DB::table('grps')->min('id'), \DB::table('grps')->max('id')),
     ];
 });
 $factory->define(\App\Poll::class, function (Faker\Generator $faker) {
@@ -53,7 +65,7 @@ $factory->define(\App\Poll::class, function (Faker\Generator $faker) {
     return [
         'content' => $faker->word(100),
         'Vote' => $faker->randomNumber(3),
-        'Post_id' => $faker->numberBetween(1,$seeder->postNumber),
+        'Post_id' => random_int(\DB::table('posts')->min('id'), \DB::table('posts')->max('id')),
     ];
 });
 $factory->define(\App\Comment::class, function (Faker\Generator $faker) {
@@ -63,8 +75,8 @@ $factory->define(\App\Comment::class, function (Faker\Generator $faker) {
         'File' => null,
         'Type' => $faker->numberBetween(1,3),
         'Popularity' => $faker->numberBetween(1,100),
-        'Account_id' => $faker->numberBetween(1,$seeder->accountNumber),
-        'Post_id' => $faker->numberBetween(1,$seeder->postNumber),
+        'Account_id' => random_int(\DB::table('accounts')->min('id'), \DB::table('accounts')->max('id')),
+        'Post_id' =>random_int(\DB::table('posts')->min('id'), \DB::table('posts')->max('id')),
 
     ];
 });
@@ -74,8 +86,8 @@ $factory->define(\App\Notification::class, function (Faker\Generator $faker) {
         'content' => $faker->word(100),
         'dateAndTime' => $faker->dateTime,
         'Seen' => $faker->boolean,
-        'Post_id' => $faker->numberBetween(1,$seeder->postNumber),
-        'Account_id' => $faker->numberBetween(1,$seeder->accountNumber)
+        'Post_id' => random_int(\DB::table('posts')->min('id'), \DB::table('posts')->max('id')),
+        'Account_id' => random_int(\DB::table('accounts')->min('id'), \DB::table('accounts')->max('id')),
     ];
 });
 $factory->define(\App\MessageNotification::class, function (Faker\Generator $faker) {
@@ -83,8 +95,8 @@ $factory->define(\App\MessageNotification::class, function (Faker\Generator $fak
     return [
         'content' => $faker->word(100),
         'Seen' => $faker->boolean,
-        'Message_id' => $faker->numberBetween(1,$seeder->messageNotificationNumber),
-        'Account_id' => $faker->numberBetween(1,100)
+        'Message_id' => random_int(\DB::table('messages')->min('id'), \DB::table('messages')->max('id')),
+        'Account_id' => random_int(\DB::table('accounts')->min('id'), \DB::table('accounts')->max('id')),
     ];
 });
 $factory->define(\App\Conversation::class, function (Faker\Generator $faker) {

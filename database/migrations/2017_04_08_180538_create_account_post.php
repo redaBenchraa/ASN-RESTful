@@ -15,11 +15,10 @@ class CreateAccountPost extends Migration
     {
         Schema::create('account_post', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('Account_id');
-            $table->integer('Post_id');
+            $table->unsignedInteger('Account_id');
+            $table->unsignedInteger('Post_id');
             $table->smallInteger('Type');
-            $table->foreign('Account_id')->references('id')->on('Account')->onDelete('cascade');
-            $table->foreign('Post_id')->references('id')->on('Post')->onDelete('cascade');
+
 
 
         });

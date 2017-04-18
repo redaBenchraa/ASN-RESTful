@@ -13,15 +13,23 @@ class DatabaseSeeder extends Seeder
         $faker  = \Faker\Factory::create() ; // Faker generator
         $seeder = new \App\Services\v1\seedNumber();  // seeder default numbers
 
-        /*factory(\App\Account::class, $seeder->accountNumber)->create();
+        factory(\App\Account::class, $seeder->accountNumber)->create();
+        DB::table('grps')->insert([
+            'Name' => $faker->name,
+            'Image' => null,
+            'creationDate' => $faker->dateTime,
+            'About' => $faker->word(50),
+            'Grp_id' => null,
+            'Account_id' =>random_int(\DB::table('accounts')->min('id'), \DB::table('accounts')->max('id')),]);
+
         factory(\App\Grp::class, $seeder->groupNumber)->create();
-        factory(\App\Poll::class, $seeder->pollNumber)->create();
         factory(\App\Post::class, $seeder->postNumber)->create();
+        factory(\App\Poll::class, $seeder->pollNumber)->create();
+        factory(\App\Conversation::class, $seeder->conversationNumber)->create();
         factory(\App\Comment::class, $seeder->commentNumber)->create();
         factory(\App\Message::class, $seeder->messageNumber)->create();
         factory(\App\Notification::class, $seeder->notificationNumber)->create();
         factory(\App\MessageNotification::class, $seeder->messageNotificationNumber)->create();
-        factory(\App\Conversation::class, $seeder->conversationNumber)->create();
 
 
         $conversationIds= DB::table('conversations')->pluck('id');
@@ -147,7 +155,7 @@ class DatabaseSeeder extends Seeder
                 ];
             }
         }
-        DB::table('account_poll')->insert($pivots);*/
+        DB::table('account_poll')->insert($pivots);
 
     }
 }

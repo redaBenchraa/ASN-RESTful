@@ -15,11 +15,10 @@ class CreateAccountComment extends Migration
     {
         Schema::create('account_comment', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('Account_id');
-            $table->integer('Comment_id');
+            $table->unsignedInteger('Account_id');
+            $table->unsignedInteger('Comment_id');
             $table->smallInteger('Type');
-            $table->foreign('Account_id')->references('id')->on('Account')->onDelete('cascade');
-            $table->foreign('Comment_id')->references('id')->on('Comment')->onDelete('cascade');
+
 
         });
     }

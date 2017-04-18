@@ -15,10 +15,9 @@ class CreateGrpAccount extends Migration
     {
         Schema::create('grp_account', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('Account_id');
-            $table->integer('Grp_id');
-            $table->foreign('Account_id')->references('id')->on('Account')->onDelete('cascade');
-            $table->foreign('Grp_id')->references('id')->on('Grp')->onDelete('cascade');
+            $table->unsignedInteger('Account_id');
+            $table->unsignedInteger('Grp_id');
+
 
         });
     }

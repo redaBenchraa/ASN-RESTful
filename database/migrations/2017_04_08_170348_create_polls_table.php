@@ -17,8 +17,7 @@ class CreatePollsTable extends Migration
             $table->increments('id');
             $table->string('Content');
             $table->smallInteger('Vote');
-            $table->integer('Post_id');
-            $table->foreign('Post_id')->references('id')->on('Post')->onDelete('cascade');
+            $table->unsignedInteger('Post_id');
             $table->timestamps();
 
         });
