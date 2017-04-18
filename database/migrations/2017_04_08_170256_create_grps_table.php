@@ -21,7 +21,7 @@ class CreateGrpsTable extends Migration
             $table->binary('Image')->nullable();
             $table->text('About');
             $table->unsignedInteger('Account_id');
-            $table->unsignedInteger('Grp_id');
+            $table->unsignedInteger('Grp_id')->nullable();
             $table->timestamps();
         });
 

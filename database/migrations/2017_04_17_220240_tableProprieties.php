@@ -29,7 +29,6 @@ class TableProprieties extends Migration
         });
         Schema::table('polls', function($table){
             $table->foreign('Post_id')->references('id')->on('posts')->onDelete('cascade');
-
         });
         Schema::table('conversations', function($table){
 
