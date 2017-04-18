@@ -48,6 +48,11 @@ Route::post('/v1/Accounts/{id}/removeMember',['uses'=>'v1\\AccountController@rem
 //Comment
 Route::post('/v1/Comments/{id}/reactedToBy',['uses'=>'v1\\ComentController@reactedToBy']);
 Route::post('/v1/Comments/{id}/removeReact',['uses'=>'v1\\ComentController@removeReact']);
+//Conversation
+Route::post('/v1/Conversations/{id}/addAccount',['uses'=>'v1\\ConversationController@addAccount']);
+Route::post('/v1/Conversations/{id}/removeAccount',['uses'=>'v1\\ConversationController@removeAccount']);
+
+
 
 
 

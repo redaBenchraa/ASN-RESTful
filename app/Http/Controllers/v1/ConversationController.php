@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\v1;
 
 use App\Services\v1\ConversationService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Mockery\Exception;
+use App\Conversation;
 
 class ConversationController extends Controller
 {
@@ -43,7 +46,12 @@ class ConversationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $conversation = $this->Conversations->createConversation($request);
+            return response()->json($conversation,201);
+        }catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);
+        }
     }
 
     /**
@@ -80,7 +88,15 @@ class ConversationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $conversation = $this->Conversations->updateConversation($request,$id);
+            return response()->json($conversation,200);
+        }catch (ModelNotFoundException $ex){
+            throw $ex;
+        }
+        catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);
+        }
     }
 
     /**
@@ -91,6 +107,24 @@ class ConversationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $conversation = $this->Conversations->deleteComment($id);
+            return response()->json('',204);
+        }catch (ModelNotFoundException $ex){
+            throw $ex;
+        }
+        catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);
+        }
+    }
+    public function addAccount(Request $req,$id){
+        $conversation = Conversation::find($id);
+        $accountId = $req->input('accountId');
+        $conversation->containAccount()->attach($accountId);
+    }
+    public function removeAccount(Request $req,$id){
+        $conversation = Conversation::find($id);
+        $accountId = $req->input('accountId');
+        $conversation->containAccount()->detach($accountId);
     }
 }

@@ -79,4 +79,18 @@ class ConversationService extends serviceBP {
         }
         return $data;
     }
+
+    public function createConversation($req){
+        $conversation = new Conversation();
+        $conversation->save();
+
+    }
+
+    public function updateConversation($req,$id){
+        //nothing to update
+    }
+    public function deleteComment($id){
+        //not sure we'll even use it
+       Conversation::find($id)->delete();
+    }
 }
