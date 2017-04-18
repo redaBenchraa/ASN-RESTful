@@ -23,6 +23,7 @@ class MessageNotificationService extends serviceBP
         'Message_Id' => 'message',
         'Account_id' => 'account',
     ];
+    protected $tableFields = ['Seen'];
 
     public function getMessageNotifications($params)
     {
@@ -57,5 +58,28 @@ class MessageNotificationService extends serviceBP
             $data [] = $entry;
         }
         return $data;
+    }
+
+    public function createMessageNotification($req){
+        $messageNotification = new MessageNotification();
+        $messageNotification->Content = $req->input('Content');
+        $messageNotification->Seen = $req->input('Seen');
+        $messageNotification->Account_id = $req->input('Account_id');
+        $messageNotification->Message_id = $req->input('Message_id');
+        $messageNotification->save();
+        return $messageNotification;
+    }
+    public function updateMessageNotification($req,$id){
+        $messageNotification = MessageNotification::find($id);
+        foreach ($this->tableFields as $field){
+            if(isset($req[$field])){
+                $messageNotification->fill([$field => $req[$field]]);
+            }
+        }
+        $messageNotification->save();
+        return $messageNotification;
+    }
+    public function deleteMessageNotification($id){
+        $messageNotification = MessageNotification::find($id)->delete();
     }
 }

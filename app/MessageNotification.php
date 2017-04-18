@@ -13,4 +13,5 @@ class MessageNotification extends Model
     public function sentTo(){
         return $this->belongsTo('App\Account','Account_id');
     }
+    protected $fillable = ['Seen'];
 }

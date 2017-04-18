@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\v1;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Services\v1\MessageNotificationService;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Http\Controllers\Controller;
+use Mockery\Exception;
 
 class MessageNotificationController extends Controller
 {
@@ -46,7 +48,12 @@ class MessageNotificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $MessageNotifications = $this->MessageNotifications->createMessageNotification($request);
+            return response()->json($MessageNotifications,201);
+        }catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);;
+        }
     }
 
     /**
@@ -80,7 +87,15 @@ class MessageNotificationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $MessageNotifications = $this->MessageNotifications->updateMessageNotification($request,$id);
+            return response()->json($MessageNotifications,200);
+        }catch (ModelNotFoundException $ex){
+            throw $ex;
+        }
+        catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);
+        }
     }
 
     /**
@@ -91,6 +106,14 @@ class MessageNotificationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $MessageNotifications = $this->MessageNotifications->deleteMessageNotification($id);
+            return response()->json('',204);
+        }catch (ModelNotFoundException $ex){
+            throw $ex;
+        }
+        catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);
+        }
     }
 }
