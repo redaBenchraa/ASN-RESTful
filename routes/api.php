@@ -54,6 +54,9 @@ Route::post('/v1/Conversations/{id}/removeAccount',['uses'=>'v1\\ConversationCon
 //Poll
 Route::post('/v1/Polls/{id}/addVoter',['uses'=>'v1\\PollController@addVoter']);
 Route::post('/v1/Polls/{id}/removeVoter',['uses'=>'v1\\PollController@removeVoter']);
+//Post
+Route::post('/v1/Posts/{id}/addReactingAccount',['uses'=>'v1\\PostController@addReactingAccount']);
+Route::post('/v1/Posts/{id}/removeReactingAccount',['uses'=>'v1\\PostController@removeReactingAccount']);
 
 
 

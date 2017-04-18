@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\v1;
 use App\Services\v1\PostService;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Http\Controllers\Controller;
 use Mockery\Exception;
+use App\Post;
 
 
 class PostController extends Controller
@@ -45,7 +46,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $post = $this->Posts->createPost($request);
+            return response()->json($post,201);
+        }catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);;
+        }
     }
 
     /**
@@ -82,7 +88,15 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $post = $this->Posts->updatePost($request,$id);
+            return response()->json($post,200);
+        }catch (ModelNotFoundException $ex){
+            throw $ex;
+        }
+        catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);
+        }
     }
 
     /**
@@ -93,6 +107,25 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-
+        try{
+            $post = $this->Posts->deletePost($id);
+            return response()->json('',204);
+        }catch (ModelNotFoundException $ex){
+            throw $ex;
+        }
+        catch(Exception $e){
+            return  response()->json(['error'=>$e->getMessage()],500);
+        }
+    }
+    public function addReactingAccount(Request $request,$id){
+        $post = Post::find($id);
+        $accountId = $request->input('accountId');
+        $Type = $request->input('Type');
+        $post->reactingAccounts()->attach($accountId,['Type'=>$Type]);
+    }
+    public function removeReactingAccount(Request $request,$id){
+        $post = Post::find($id);
+        $accountId = $request->input('accountId');
+        $post->reactingAccounts()->detach($accountId);
     }
 }
