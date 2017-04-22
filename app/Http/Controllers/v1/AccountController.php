@@ -118,6 +118,16 @@ class AccountController extends Controller
             return  response()->json(['error'=>$e->getMessage()],500);
         }
     }
+    public function checkAccount(Request $request){
+        $email = $request->input('Email');
+        $password = $request->input('password');
+        $account = Account::where([['Email','=',$email],['password','=',$password]]);
+        if($account != null){
+            return response()->json($account,200);
+        }else{
+            return response()->json('',404);
+        }
+    }
     public function addConversation(Request $req,$id){
         $account = Account::find($id);
         $conversationId = $req->input('conversationId');
