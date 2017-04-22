@@ -17,6 +17,7 @@ class CreateGrpAccount extends Migration
             $table->increments('id');
             $table->unsignedInteger('Account_id');
             $table->unsignedInteger('Grp_id');
+            $table->boolean('Accepted');
 
 
         });

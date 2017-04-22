@@ -136,9 +136,14 @@ class GrpController extends Controller
     public function addMember(Request $req,$id){
         $group = Grp::find($id);
         $memberId = $req->input('memberId');
-        $group->containMembers()->attach($memberId);
+        $group->containMembers()->attach($memberId,['Accepted'=>0]);
     }
-
+    public function updateMember(Request $req,$id){
+        $group = Grp::find($id);
+        $memberId = $req->input('memberId');
+        $accepted = $req->input('Accepted');
+        $group->containMembers()->updateExistingPivot($memberId, ['Accepted'=>$accepted]);
+    }
     public function removeMember(Request $req,$id){
         $group = Grp::find($id);
         $memberId = $req->input('memberId');

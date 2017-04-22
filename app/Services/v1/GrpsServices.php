@@ -27,7 +27,7 @@ class GrpsServices extends serviceBP {
         'Name' => 'named'
     ];
 
-    protected $tableFields = ['Name','creationDate','Image','About','Account_id','Grp_id'];
+    protected $tableFields = ['Name','Image','About'];
 
 
     public function getGrps($params){

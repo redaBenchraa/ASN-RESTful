@@ -31,6 +31,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/v1/Groups/{id}/addAdmin',['uses'=>'v1\\GrpController@addAdmin']);
 Route::post('/v1/Groups/{id}/removeAdmin',['uses'=>'v1\\GrpController@removeAdmin']);
 Route::post('/v1/Groups/{id}/addMember',['uses'=>'v1\\GrpController@addMember']);
+Route::post('/v1/Groups/{id}/updateMember',['uses'=>'v1\\GrpController@updateMember']);
 Route::post('/v1/Groups/{id}/removeMember',['uses'=>'v1\\GrpController@removeMember']);
 //Account
 Route::post('/v1/Accounts/{id}/addConversation',['uses'=>'v1\\AccountController@addConversation']);

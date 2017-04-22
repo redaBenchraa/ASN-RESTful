@@ -29,6 +29,6 @@ class Grp extends Model
     public function containMembers(){
         return $this->belongsToMany('App\Account','grp_account','Grp_id','Account_id');
     }
-    protected $fillable = ['Name','Image','About','Account_id','Grp_id'];
+    protected $fillable = ['Name','Image','About'];
 
 }
