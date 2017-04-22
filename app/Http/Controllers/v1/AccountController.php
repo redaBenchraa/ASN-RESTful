@@ -121,11 +121,11 @@ class AccountController extends Controller
     public function checkAccount(Request $request){
         $email = $request->input('Email');
         $password = $request->input('password');
-        $account = Account::where([['Email','=',$email],['password','=',$password]]);
-        if($account != null){
+        try{
+            $account = Account::where([['Email','=',$email],['password','=',$password]])->firstOrFail();
             return response()->json($account,200);
-        }else{
-            return response()->json('',404);
+        }catch(ModelNotFoundException  $e){
+            return  response()->json(['error'=>$e->getMessage()],404);;
         }
     }
     public function addConversation(Request $req,$id){
