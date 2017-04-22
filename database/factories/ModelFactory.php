@@ -8,6 +8,7 @@ $factory->define(\App\Account::class, function (Faker\Generator $faker) {
         'firstName' => $faker->firstName,
         'lastName' => $faker->lastName,
         'Email' => $faker->email,
+        'Password' => $faker->password,
         'About' => $faker->sentence(5),
         'showEmail' => $faker->boolean(),
         'Image' => null,

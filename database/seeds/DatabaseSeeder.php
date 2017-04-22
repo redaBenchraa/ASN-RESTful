@@ -61,7 +61,8 @@ class DatabaseSeeder extends Seeder
             for($index = 0; $index < 5; $index++) {
                    $pivots[] = [
                         'Grp_id' => $groupId,
-                        'Account_id' => array_shift($array)
+                        'Account_id' => array_shift($array),
+                        'Accepted' =>  $faker->boolean
                    ];
             }
         }
