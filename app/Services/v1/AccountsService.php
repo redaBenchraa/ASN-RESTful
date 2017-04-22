@@ -222,6 +222,7 @@ class AccountsService extends serviceBP {
         $account->firstName = $req->input('firstName');
         $account->lastName = $req->input('lastName');
         $account->Email = $req->input('Email');
+        $account->Password = $req->input('password');
         $account->About = $req->input('About');
         $account->showEmail = $req->input('showEmail');
         $account->Image = $req->input('Image');
