@@ -18,6 +18,7 @@ class CreateAccountsTable extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->string('Email');
+            $table->string('Password');
             $table->string('About')->nullable();
             $table->boolean('showEmail');
             $table->binary('Image')->nullable();
