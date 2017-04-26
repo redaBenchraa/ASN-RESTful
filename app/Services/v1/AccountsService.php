@@ -88,13 +88,7 @@ class AccountsService extends serviceBP {
                 $Messages= $Account->sendMessage;
                 $messageList = [];
                 foreach ($Messages as $Message) {
-                    $messageItem = [
-                        'id' => $Message->id,
-                        'Content' => $Message->Content,
-                        'Conversation' =>  $Message->Conversation_id,
-                        'date' =>$Message->created_at,
-                    ];
-                    $messageList[] = $messageItem;
+                    $messageList[] = $Message;
                 }
                 $entry['sentMessages'] = $messageList;
             }
@@ -102,31 +96,17 @@ class AccountsService extends serviceBP {
                 $Posts= $Account->Post;
                 $postList = [];
                 foreach ($Posts as $Post) {
-                    $postItem = [
-                        'id' => $Post->id,
-                        'Content' => $Post->content,
-                        'date' =>$Post->postingDate,
-                        'popularity' =>$Post->popularity,
-                        'File' =>$Post->File,
-                        'Image' =>$Post->Image
-                    ];
-                    $postList[] = $postItem;
+                    $postList[] = $Post;
                 }
                 $entry['posts'] = $postList;
             }
             if(in_array('belongsToGroup',$withKeys)){
                 $Groups = $Account->belongsToGroup;
-                $administratedGroups =[];
+                $groupsItem = [];
                 foreach ($Groups as $Group) {
-                    $grp = [
-                        'id' => $Group->id,
-                        'Name' => $Group->Name,
-                        'About' => $Group->About,
-                        'createdDate' =>$Group->creationDate
-                    ];
-                    $administratedGroups[] = $grp;
+                    $groupsItem[] = $Group;
                 }
-                $entry['groups'] = $administratedGroups;
+                $entry['groups'] = $groupsItem;
             }
             if(in_array('administrate',$withKeys)){
                 $Groups = $Account->administrate;
@@ -136,7 +116,7 @@ class AccountsService extends serviceBP {
                         'id' => $Group->id,
                         'Name' => $Group->Name,
                         'About' => $Group->About,
-                        'createdDate' =>$Group->creationDate
+                        'creationDate' =>$Group->creationDate
                     ];
                     $administratedGroups[] = $grp;
                 }
@@ -146,11 +126,7 @@ class AccountsService extends serviceBP {
                 $Groups = $Account->createGroup;
                 $createdGroups =[];
                 foreach ($Groups as $Group) {
-                    $grp = [
-                        'Name' => $Group->Name,
-                        'About' => $Group->About,
-                        'createdDate' =>$Group->creationDate
-                    ];
+                    $grp = $Group;
                     $createdGroups[] = $grp;
                 }
                 $entry['createdGroups'] = $createdGroups;
@@ -158,21 +134,23 @@ class AccountsService extends serviceBP {
             if(in_array('participateInConversation',$withKeys)){
                 $Conversations = $Account->participateInConversation;
                 $conversationList =[];
-                $Accounts = [];
                 foreach ($Conversations as $conversation) {
+                    $Accounts = [];
+                    $Messages = [];
                     foreach ($conversation->containAccount as $Account){
-                        $accountItem = [
-                            "id" => $Account->id,
-                            "firstName" => $Account->firstName,
-                            "lastName" => $Account->lastName,
-                        ];
+                        $accountItem = $Account;
                         $Accounts[]= $accountItem;
+
+                    }
+                    foreach ($conversation->containMessage as $Message){
+                        $messageItem = $Message;
+                        $Messages[]= $messageItem;
 
                     }
                     $conversationItem = [
                         'id' => $conversation->id,
                         'accounts' =>$Accounts,
-                        'lastMessage' => $conversation->containMessage->pluck('Content')->first(),
+                        'messages' =>$Messages,
                     ];
                     $conversationList[] = $conversationItem;
                 }
@@ -244,6 +222,18 @@ class AccountsService extends serviceBP {
     }
     public function deleteAccount($id){
         Account::find($id)->delete();
+    }
+    public function searchMembers($search){
+        $data = [];
+        $accounts =  Account::where(function ($query) use($search) {
+            $query->where('Email', 'like', $search."%")
+                ->orwhere('firstName', 'like', $search."%")
+                ->orwhere('lastName', 'like', $search."%");
+        })->take(30)->get();
+        foreach ($accounts as $account){
+            $data[] = $account;
+        }
+        return $data;
     }
 
 }

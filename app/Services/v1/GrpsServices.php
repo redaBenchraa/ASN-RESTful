@@ -49,8 +49,7 @@ class GrpsServices extends serviceBP {
                 'Name' => $Grp->Name,
                 'Image' => $Grp->Image,
                 'About' => $Grp->About,
-                'CreationDate' => $Grp->creationDate,
-                'href' => route('Groups.show',['id'=>$Grp->id]),
+                'creationDate' => $Grp->creationDate,
             ];
             if(in_array('createdBy',$withKeys)){
                 $groupOwner = $Grp->createdBy;
@@ -143,23 +142,18 @@ class GrpsServices extends serviceBP {
                     $Polls = $post->containedPolls;
                     $PollsList = [];
                     foreach ($Polls as $poll) {
-                        $pollOption = [
-                            'id'=>$poll->id,
-                            'Content'=>$poll->Content,
-                            'Vote'=>$poll->Vote,
-                        ];
-
-                        $PollsList[] = $pollOption;
+                        $PollsList[] = $poll;
                     }
-                   $Comments = $post->containedComments->count();
+                    $Comments = $post->containedComments;
                     $aPost = [
                         'id'=>$post->id,
-                        'content'=>$post->content,
+                        'Content'=>$post->content,
                         'Image'=>$post->Image,
                         'File'=>$post->File,
                         'Type'=>$post->Type,
                         'postingDate'=>$post->postingDate,
                         'popularity' =>$post->popularity,
+                        'group' =>$post->containingGrp,
                         'poster'=>$Account,
                         'polls' => $PollsList,
                         'comments'=> $Comments

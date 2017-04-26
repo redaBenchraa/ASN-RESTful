@@ -46,7 +46,7 @@ class PostService  extends serviceBP {
         foreach ($Posts as $Post){
             $entry = [
                 'id' => $Post->id,
-                'content' => $Post->content,
+                'Content' => $Post->content,
                 'File' => $Post->File,
                 'Image' => $Post->Image,
                 'Type' => $Post->Type,

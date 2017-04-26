@@ -122,6 +122,14 @@ class ConversationController extends Controller
         $accountId = $req->input('accountId');
         $conversation->containAccount()->attach($accountId);
     }
+    public function addAccounts(Request $req,$id){
+        $conversation = Conversation::find($id);
+        $accountIds[] = explode(",",$req->input('accountIds'));
+        foreach ($accountIds as $accountId){
+            $conversation->containAccount()->attach($accountId);
+        }
+    }
+
     public function removeAccount(Request $req,$id){
         $conversation = Conversation::find($id);
         $accountId = $req->input('accountId');
