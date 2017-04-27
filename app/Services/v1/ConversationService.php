@@ -15,7 +15,6 @@ class ConversationService extends serviceBP {
     protected $supportedFields = [
         'containMessage' => 'messages',
         'containAccount' => 'accounts',
-
     ];
     protected $clauseProprieties = [
         'id' => 'id',
@@ -37,7 +36,6 @@ class ConversationService extends serviceBP {
         foreach ($Conversations as $Conversation){
             $entry = [
                 'id' => $Conversation->id,
-                'lastMessage' => $Conversation->containMessage->first(),
                 'href' => route('Conversations.show',['id'=>$Conversation->id]),
             ];
 
@@ -45,12 +43,7 @@ class ConversationService extends serviceBP {
                 $Messages= $Conversation->containMessage;
                 $messageList = [];
                 foreach ($Messages as $Message) {
-                    $messageItem = [
-                        'id' => $Message->id,
-                        'Content' => $Message->Content,
-                        'Message_id' =>  $Message->id,
-                        'date' =>$Message->created_at,
-                    ];
+                    $messageItem = $Message;
                     $messageList[] = $messageItem;
                 }
                 $entry['messages'] = $messageList;
@@ -59,17 +52,7 @@ class ConversationService extends serviceBP {
                 $Accounts= $Conversation->containAccount;
                 $accountList = [];
                 foreach ($Accounts as $Account) {
-                    $accountItem = [
-                        'id' => $Account->id,
-                        'firstName' => $Account->firstName,
-                        'lastName' => $Account->lastName,
-                        'About' => $Account->About,
-                        'Image' => $Account->Image,
-                        'Email' => $Account->Email,
-                        'showEmail' => $Account->showEmail,
-                        'xCoordinate' => $Account->xCoordinate,
-                        'yCoordinate' => $Account->yCoordinate,
-                    ];
+                    $accountItem = $Account;
                     $accountList[] = $accountItem;
                 }
                 $entry['accounts'] = $accountList;
@@ -83,7 +66,7 @@ class ConversationService extends serviceBP {
     public function createConversation($req){
         $conversation = new Conversation();
         $conversation->save();
-
+        return $conversation;
     }
 
     public function updateConversation($req,$id){

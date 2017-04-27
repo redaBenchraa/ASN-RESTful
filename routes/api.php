@@ -26,7 +26,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Routs for managing the pivot tables
 //Grp
 Route::post('/v1/Groups/{id}/addAdmin',['uses'=>'v1\\GrpController@addAdmin']);
 Route::post('/v1/Groups/{id}/removeAdmin',['uses'=>'v1\\GrpController@removeAdmin']);
@@ -47,11 +46,14 @@ Route::post('/v1/Accounts/{id}/becomeAdmin',['uses'=>'v1\\AccountController@beco
 Route::post('/v1/Accounts/{id}/removeAdmin',['uses'=>'v1\\AccountController@removeAdmin']);
 Route::post('/v1/Accounts/{id}/becomeMember',['uses'=>'v1\\AccountController@becomeMember']);
 Route::post('/v1/Accounts/{id}/removeMember',['uses'=>'v1\\AccountController@removeMember']);
+Route::get('/v1/Accounts/searchMembers/{search}',['uses'=>'v1\\AccountController@searchMembers']);
+
 //Comment
 Route::post('/v1/Comments/{id}/reactedToBy',['uses'=>'v1\\ComentController@reactedToBy']);
 Route::post('/v1/Comments/{id}/removeReact',['uses'=>'v1\\ComentController@removeReact']);
 //Conversation
 Route::post('/v1/Conversations/{id}/addAccount',['uses'=>'v1\\ConversationController@addAccount']);
+Route::post('/v1/Conversations/{id}/addAccounts',['uses'=>'v1\\ConversationController@addAccounts']);
 Route::post('/v1/Conversations/{id}/removeAccount',['uses'=>'v1\\ConversationController@removeAccount']);
 //Poll
 Route::post('/v1/Polls/{id}/addVoter',['uses'=>'v1\\PollController@addVoter']);
@@ -59,10 +61,6 @@ Route::post('/v1/Polls/{id}/removeVoter',['uses'=>'v1\\PollController@removeVote
 //Post
 Route::post('/v1/Posts/{id}/addReactingAccount',['uses'=>'v1\\PostController@addReactingAccount']);
 Route::post('/v1/Posts/{id}/removeReactingAccount',['uses'=>'v1\\PostController@removeReactingAccount']);
-
-
-
-
 
 
 Route::resource('/v1/Accounts', AccountController::class);

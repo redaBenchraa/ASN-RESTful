@@ -193,6 +193,10 @@ class AccountController extends Controller
         $groupId= $req->input('groupId');
         $account->belongsToGroup()->detach($groupId);
     }
+    public function searchMembers($search){
+        $data = $this->Accounts->searchMembers($search);
+        return response()->json($data);
+    }
 
 
 
