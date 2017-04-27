@@ -32,6 +32,7 @@ Route::post('/v1/Groups/{id}/removeAdmin',['uses'=>'v1\\GrpController@removeAdmi
 Route::post('/v1/Groups/{id}/addMember',['uses'=>'v1\\GrpController@addMember']);
 Route::post('/v1/Groups/{id}/updateMember',['uses'=>'v1\\GrpController@updateMember']);
 Route::post('/v1/Groups/{id}/removeMember',['uses'=>'v1\\GrpController@removeMember']);
+Route::get('/v1/Groups/{id}/pendingMembers',['uses'=>'v1\\GrpController@pendingMembers']);
 //Account
 Route::post('/v1/Accounts/checkAccount',['uses'=>'v1\\AccountController@checkAccount']);
 Route::post('/v1/Accounts/{id}/addConversation',['uses'=>'v1\\AccountController@addConversation']);

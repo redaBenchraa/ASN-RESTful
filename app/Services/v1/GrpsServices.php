@@ -16,6 +16,7 @@ class GrpsServices extends serviceBP {
         'createdBy' => 'owner',
         'administratedBy' => 'admins',
         'containMembers' => 'members',
+        'pendingMembers' => 'requests',
         'contain' => 'posts',
         'haveSuperGroup' => 'super',
         'haveSubGroup' =>'subs'
@@ -97,6 +98,30 @@ class GrpsServices extends serviceBP {
             }
             if(in_array('containMembers',$withKeys)){
                 $Members = $Grp->containMembers;
+                $MembersList = [];
+                foreach ($Members as $member) {
+                    $aMember = [
+                        //'id' => $member->id,
+                        //'firstName' => $member->firstName,
+                        //'lastName' => $member->lastName,
+                        // 'href' => $member->route('Accounts.show',['id'=>$Admin->id]),
+                        'id' => $member->id,
+                        'firstName' => $member->firstName,
+                        'lastName' => $member->lastName,
+                        //'href' => $this->getAccountRoute($member),
+                        'Email' => $member->Email,
+                        'About' => $member->About,
+                        'showEmail' => $member->showEmail,
+                        'Image' => $member->Image,
+                        'xCoordinate' => $member->xCoordinate,
+                        'yCoordinate' => $member->yCoordinate,
+                    ];
+                    $MembersList[] = $aMember;
+                }
+                $entry['members'] = $MembersList;
+            }
+            if(in_array('pendingMembers',$withKeys)){
+                $Members = $Grp->pendingMembers;
                 $MembersList = [];
                 foreach ($Members as $member) {
                     $aMember = [

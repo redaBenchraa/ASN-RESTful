@@ -27,7 +27,12 @@ class Grp extends Model
     }
 
     public function containMembers(){
-        return $this->belongsToMany('App\Account','grp_account','Grp_id','Account_id');
+        return $this->belongsToMany('App\Account','grp_account','Grp_id','Account_id')
+            ->wherePivot('Accepted','=',1);
+    }
+    public function pendingMembers(){
+        return $this->belongsToMany('App\Account','grp_account','Grp_id','Account_id')
+            ->wherePivot('Accepted','=',0);
     }
     protected $fillable = ['Name','Image','About'];
 
