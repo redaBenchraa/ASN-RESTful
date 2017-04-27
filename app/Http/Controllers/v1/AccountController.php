@@ -49,6 +49,9 @@ class AccountController extends Controller
     {
         try{
             $Account = $this->Accounts->createAccount($request);
+            if(is_null($Account)){
+                return response()->json(['error'=>'Account already exists']);
+            }
             return response()->json($Account,201);
         }catch(Exception $e){
             return  response()->json(['error'=>$e->getMessage()],500);;

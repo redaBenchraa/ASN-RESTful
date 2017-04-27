@@ -224,10 +224,13 @@ class AccountsService extends serviceBP {
         $account->Email = $req->input('Email');
         $account->Password = $req->input('password');
         $account->About = $req->input('About');
-        $account->showEmail = $req->input('showEmail');
+        $account->showEmail = 1;
         $account->Image = $req->input('Image');
         $account->xCoordinate = $req->input('xCoordinate');
         $account->yCoordinate = $req->input('yCoordinate');
+        if(!is_null(Account::where('Email',$req->input('Email'))->get())){
+            return null;
+        }
         $account->save();
         return $account;
     }
