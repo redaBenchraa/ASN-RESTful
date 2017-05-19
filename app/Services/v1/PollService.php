@@ -82,6 +82,7 @@ class PollService extends serviceBP {
         $poll->save();
         return $poll;
     }
+
     public function updatePoll($req,$id){
         $poll = Poll::find($id);
         foreach ($this->tableFields as $field){

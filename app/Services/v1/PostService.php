@@ -139,6 +139,19 @@ class PostService  extends serviceBP {
         $post->save();
         return $post;
     }
+    public function createPostWithPolls($req){
+        $post = new Post();
+        $post->Content = $req->input('Content');
+        $post->Image = $req->input('Image');
+        $post->File = $req->input('File');
+        $post->Type = $req->input('Type');
+        $post->postingDate = $req->input('postingDate');
+        $post->popularity = 0;
+        $post->Account_id = $req->input('Account_id');
+        $post->Grp_id = $req->input('Grp_id');
+        $post->save();
+        return $post;
+    }
     public function updatePost($req,$id){
         $post = Post::find($id);
         foreach ($this->tableFields as $field){
