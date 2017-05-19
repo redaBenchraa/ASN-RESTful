@@ -9,6 +9,7 @@
 namespace App\Services\v1;
 
 use App\Grp;
+use Carbon\Carbon;
 
 
 class GrpsServices extends serviceBP {
@@ -201,7 +202,8 @@ class GrpsServices extends serviceBP {
     public function createGroup($req){
         $Grp = new Grp();
         $Grp->Name = $req->input('Name');
-        $Grp->creationDate = $req->input('creationDate');
+        //$Grp->creationDate = $req->input('creationDate');
+        $Grp->creationDate = Carbon::now();
         $Grp->Image = $req->input('Image');
         $Grp->About = $req->input('About');
         $Grp->Account_id = $req->input('Account_id');
