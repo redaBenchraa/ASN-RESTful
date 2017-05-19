@@ -149,4 +149,8 @@ class GrpController extends Controller
         $memberId = $req->input('memberId');
         $group->containMembers()->detach($memberId);
     }
+    public function searchGroups($search){
+        $data = $this->Grps->searchGroups($search);
+        return response()->json($data);
+    }
 }

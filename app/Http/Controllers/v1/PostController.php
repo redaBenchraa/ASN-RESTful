@@ -121,11 +121,21 @@ class PostController extends Controller
         $post = Post::find($id);
         $accountId = $request->input('accountId');
         $Type = $request->input('Type');
-        $post->reactingAccounts()->attach($accountId,['Type'=>$Type]);
+        $post->reactingAccounts()->attach($accountId,['Type'=> $Type]);
+        if($Type == 2){
+            $post->popularity--;
+        }else{
+            $post->popularity++;
+        }
+        $post->save();
+        return response()->json($post->popularity,200);
     }
     public function removeReactingAccount(Request $request,$id){
         $post = Post::find($id);
         $accountId = $request->input('accountId');
         $post->reactingAccounts()->detach($accountId);
+        $post->popularity--;
+        $post->save();
+        return response()->json($post->popularity,200);
     }
 }

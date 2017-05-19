@@ -9,6 +9,7 @@
 namespace App\Services\v1;
 
 
+use App\Account;
 use App\Comment;
 
 class CommentService extends serviceBP {
@@ -51,7 +52,7 @@ class CommentService extends serviceBP {
                 'Type' => $Comment->Type,
                 'postingDate' => $Comment->created_at,
                 'popularity' => $Comment->Popularity,
-                'Account' => $Comment->Account_id,
+                'Publisher' => $Comment->commentedBy->firstName.' '.$Comment->commentedBy->lastName,
                 'Post' => $Comment->Post_id,
                 'href' => route('Comments.show',['id'=>$Comment->id]),
             ];
@@ -97,6 +98,7 @@ class CommentService extends serviceBP {
 
     public function createComment($req){
         $comment = new Comment();
+        $account = Account::find($req->input('Account_id'));
         $comment->Content = $req->input('Content');
         $comment->File = $req->input('File');
         $comment->Type = $req->input('Type');
@@ -104,6 +106,8 @@ class CommentService extends serviceBP {
         $comment->Account_id = $req->input('Account_id');
         $comment->Post_id = $req->input('Post_id');
         $comment->save();
+        $comment->Reactions = \DB::table('account_comment')->where("Comment_id",$comment->id)->get();
+        $comment->Publisher = $account->firstName.' '.$account->lastName;
         return $comment;
     }
 

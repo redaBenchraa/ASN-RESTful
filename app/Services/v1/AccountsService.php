@@ -206,7 +206,7 @@ class AccountsService extends serviceBP {
         $account->Image = $req->input('Image');
         $account->xCoordinate = $req->input('xCoordinate');
         $account->yCoordinate = $req->input('yCoordinate');
-        if(!is_null(Account::where('Email',$req->input('Email'))->get())){
+        if(Account::where('Email',$req->input('Email'))->count() !=0){
             return null;
         }
         $account->save();

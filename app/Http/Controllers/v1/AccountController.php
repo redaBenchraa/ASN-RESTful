@@ -54,7 +54,7 @@ class AccountController extends Controller
             }
             return response()->json($Account,201);
         }catch(Exception $e){
-            return  response()->json(['error'=>$e->getMessage()],500);;
+            return  response()->json(['error'=>$e->getMessage()],500);
         }
     }
 
@@ -197,7 +197,5 @@ class AccountController extends Controller
         $data = $this->Accounts->searchMembers($search);
         return response()->json($data);
     }
-
-
-
+    
 }

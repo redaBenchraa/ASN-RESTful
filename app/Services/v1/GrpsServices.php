@@ -108,7 +108,6 @@ class GrpsServices extends serviceBP {
                         'id' => $member->id,
                         'firstName' => $member->firstName,
                         'lastName' => $member->lastName,
-                        //'href' => $this->getAccountRoute($member),
                         'Email' => $member->Email,
                         'About' => $member->About,
                         'showEmail' => $member->showEmail,
@@ -132,7 +131,6 @@ class GrpsServices extends serviceBP {
                         'id' => $member->id,
                         'firstName' => $member->firstName,
                         'lastName' => $member->lastName,
-                        //'href' => $this->getAccountRoute($member),
                         'Email' => $member->Email,
                         'About' => $member->About,
                         'showEmail' => $member->showEmail,
@@ -170,6 +168,11 @@ class GrpsServices extends serviceBP {
                         $PollsList[] = $poll;
                     }
                     $Comments = $post->containedComments;
+                    foreach ($Comments as $comment){
+                        $comment->Publisher = $Account->firstName.' '.$Account->lastName;
+                        $comment->Reactions = \DB::table('account_comment')->where("Comment_id",$comment->id)->get();
+                    }
+                    $reactions= \DB::table('account_post')->where("Post_id",$post->id)->get();
                     $aPost = [
                         'id'=>$post->id,
                         'Content'=>$post->content,
@@ -181,8 +184,8 @@ class GrpsServices extends serviceBP {
                         'group' =>$post->containingGrp,
                         'poster'=>$Account,
                         'polls' => $PollsList,
-                        'comments'=> $Comments
-
+                        'comments'=> $Comments,
+                        'reactions'=>$reactions,
                     ];
                     $PostsList[] = $aPost;
                 }
@@ -219,5 +222,15 @@ class GrpsServices extends serviceBP {
     }
     public function deleteGroup($id){
         Grp::find($id)->delete();
+    }
+    public function searchGroups($search){
+        $data = [];
+        $accounts =  Grp::where(function ($query) use($search) {
+            $query->where('Name', 'like', $search."%");
+        })->take(30)->get();
+        foreach ($accounts as $account){
+            $data[] = $account;
+        }
+        return $data;
     }
 }

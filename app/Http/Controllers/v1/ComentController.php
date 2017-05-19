@@ -120,12 +120,33 @@ class ComentController extends Controller
     public function reactedToBy(Request $req,$id){
         $comment = Comment::find($id);
         $accountId =  $req->input('accountId');
-        $Type = $req->input('type');
+        $Type = $req->input('Type');
+        if($Type == 1){
+            $comment->Popularity = $comment->Popularity+1;
+        }else{
+            $comment->Popularity = $comment->Popularity-1;
+        }
         $comment->reactingAccounts()->attach($accountId,['Type'=>$Type]);
+        $comment->save();
     }
     public function removeReact(Request $req,$id){
         $comment = Comment::find($id);
         $accountId =  $req->input('accountId');
+        $Type =  $req->input('Type');
+        if($req->input("delete") != null){
+            if($Type == 2){
+                $comment->Popularity = $comment->Popularity+1;
+            }else{
+                $comment->Popularity = $comment->Popularity-1;
+            }
+        }else{
+            if($Type == 2){
+                $comment->Popularity = $comment->Popularity+1;
+            }else{
+                $comment->Popularity = $comment->Popularity-1;
+            }
+        }
         $comment->reactingAccounts()->detach($accountId);
+        $comment->save();
     }
 }

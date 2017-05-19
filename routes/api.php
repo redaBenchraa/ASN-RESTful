@@ -74,3 +74,6 @@ Route::resource('/v1/Messages', MessageController::class);
 Route::resource('/v1/Polls', PollController::class);
 Route::resource('/v1/MessageNotifications', MessageNotificationController::class);
 Route::resource('/v1/Notifications', NotificationController::class);
+
+Route::get('/v1/Groups/searchGroups/{search}',['uses'=>'v1\\GrpController@searchGroups']);
+
